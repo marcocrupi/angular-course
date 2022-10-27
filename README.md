@@ -28,10 +28,28 @@ tsconfig.spec.json è legata al testing di Typescript.
 
 ### FILE NELLA CARTELLA SRC
 
-Nella cartella app abbiamo dei file:
+Nella cartella app abbiamo i file:
 
 * app.module.ts è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
 * Abbiamo inoltre i 3 file dei componenti (.ts - .html - .css).
 * app-routing.module.ts un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
 
+Nella cartella assets si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc... 
+
+Nella cartella enviroments abbiamo i file:
+
+* environment.prod.ts è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test. 
+* environment.ts è l'ambiente di sviluppo
+
+La favicon.ico non ha bisogno di presentazioni.
+
+index.html da cui parte tutto.
+
+main.ts è il file da cui parte tutta l'applicazione Angular. Noi mandiamo a schermo index.html ma è da qui che parte tutto. Da notare tra le linee di codice l'enviroment e l'AppModule.
+
+polyfills.ts è per il supporto dei vari browser.
+
+styles.scss (o css) è lo stile globale dell'app.
+
+test.ts serve per il test (non lo useremo in questo corso).
 
