@@ -32,16 +32,16 @@ tsconfig.spec.json è legata al testing di Typescript.
 
 Nella cartella app abbiamo i file:
 
-* app.module.ts è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
-* Abbiamo inoltre i 3 file dei componenti (.ts - .html - .css).
-* app-routing.module.ts un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
+- app.module.ts è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
+- Abbiamo inoltre i 3 file dei componenti (.ts - .html - .css).
+- app-routing.module.ts un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
 
-Nella cartella assets si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc... 
+Nella cartella assets si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc...
 
 Nella cartella enviroments abbiamo i file:
 
-* environment.prod.ts è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test. 
-* environment.ts è l'ambiente di sviluppo
+- environment.prod.ts è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test.
+- environment.ts è l'ambiente di sviluppo
 
 La favicon.ico non ha bisogno di presentazioni.
 
@@ -78,22 +78,22 @@ Noi abbiamo tre file ma potremmo averli tutti in app.component.ts, invece prefer
 Analizziamo il componente che Angular ha creato di default, nello specifico il file app.component.ts:
 
 ```ts
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 // Questo è un decorator, serve a decorare le classi in Angular,
 // ci permette di decorare una classe specificando che cos'è, ovvero un componente
 @Component({
   // Questo selettore punta ad "app-root" che si trova in index.html nel body.
-  selector: 'app-root',
+  selector: "app-root",
 
   // Questo è l'HTML del componente.
-  templateUrl: './app.component.html',
+  templateUrl: "./app.component.html",
 
   // Questo è il CSS del componente, è un array, ciò ci permette di averne più di uno.
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'angular-course';
+  title = "angular-course";
 }
 ```
 
@@ -103,19 +103,19 @@ ng g c prova
 
 Dove "g" sta per generate e "c" sta per component.
 
-Verrà generata una cartella con i file tipici dei componenti Angular che abbiamo visto prima. 
+Verrà generata una cartella con i file tipici dei componenti Angular che abbiamo visto prima.
 
-Un'altra cosa che è successa è l'update di app.module.ts, potevamo farlo a mano ma con una semplice riga di terminale abbiamo avuto tutto automatizzato. 
+Un'altra cosa che è successa è l'update di app.module.ts, potevamo farlo a mano ma con una semplice riga di terminale abbiamo avuto tutto automatizzato.
 
 Questo è il file .ts che ha generato:
 
 ```ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-prova',
-  templateUrl: './prova.component.html',
-  styleUrls: ['./prova.component.scss'],
+  selector: "app-prova",
+  templateUrl: "./prova.component.html",
+  styleUrls: ["./prova.component.scss"],
 })
 
 // Presenta una differenza col component creato di default,
@@ -128,7 +128,7 @@ export class ProvaComponent implements OnInit {
 }
 ```
 
-Puliamo il file app.component.html e inseriamo semplicemente il selettore:  
+Puliamo il file app.component.html e inseriamo semplicemente il selettore:
 
 ```html
 <app-prova></app-prova>
@@ -138,11 +138,11 @@ Comparirà l'HTML presente nel nostro componente, Angular riconosce in automatic
 
 ## Angular Material Design - LEZIONE 4
 
-Angular Material Design è un framework CSS creato da Google in formato specifico per Angular. 
+Angular Material Design è un framework CSS creato da Google in formato specifico per Angular.
 
 Il link del progetto è https://material.angular.io/
 
-Apriamo la documentazione di Angular Material: https://material.angular.io/guide/getting-started 
+Apriamo la documentazione di Angular Material: https://material.angular.io/guide/getting-started
 
 Installiamo con il comando:
 
@@ -172,7 +172,7 @@ Schema di un ciclo di vita di un componente:
 
 ngOnInit() l'avevamo già incontrato, ed era stato creato automaticamente da Angular non appena abbiamo creato il componente prova.
 
-Non appena viene inizializzato il componente fa un controllo ngDoCheck(). 
+Non appena viene inizializzato il componente fa un controllo ngDoCheck().
 
 Poniamo il caso non ci sia niente in questo controllo si passa a ngAfterContentInit(), il content non è altro che il testo, tutto ciò che è all'interno dei tag html.
 
@@ -180,7 +180,7 @@ Dopo che viene inizializzato il conenuto viene controllato, ngAfterContentChecke
 
 Dopodiché viene inizializzata la view con ngAfterInit(), la view è la parte visibile del componente, ovvero il risultato finale.
 
-La view viene anch'essa controllata, ngAfterViewChecked(), ed il componente rimane visibile sullo schermo fino a che noi non lo distruggiamo ngOnDestroy.  
+La view viene anch'essa controllata, ngAfterViewChecked(), ed il componente rimane visibile sullo schermo fino a che noi non lo distruggiamo ngOnDestroy.
 
 I metodi in rosso vengono chiamati una volta sola, ovvero quando il componente viene creato, quelli in verde vengono chiamati ogni volta che succede qualcosa.
 
@@ -189,3 +189,66 @@ ngOnChanges() vuol dire che il nostro componente è sempre in ascolto e che poss
 Questo ciclo di vita ci permette di andare a fare cose mirate quando succedono determinati eventi.
 
 Adesso vediamo in pratica alcuni esempi.
+
+Apriamo il componente prova.component.ts e impostiamo i controlli inserendo un console.log.
+
+```ts
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+
+@Component({
+  selector: "app-prova",
+  templateUrl: "./prova.component.html",
+  styleUrls: ["./prova.component.scss"],
+})
+
+// Presenta una differenza col component creato di default,
+// c'è OnInit e il costruttore.
+// Oltre OnInit che era di default aggiungiamo tutti gli altri controlli del lifecycle.
+export class ProvaComponent
+  implements
+    OnInit,
+    AfterContentChecked,
+    AfterContentInit,
+    AfterViewChecked,
+    AfterViewInit,
+    DoCheck,
+    OnDestroy
+{
+  constructor() {
+    console.log("costruttore");
+  }
+  // Tramite la correzione rapida abbiamo implementato tutte le interfacce
+  ngAfterContentChecked(): void {
+    console.log("ngAfterContentChecked");
+  }
+  ngAfterContentInit(): void {
+    console.log("ngAfterContentInit");
+  }
+  ngAfterViewChecked(): void {
+    console.log("ngAfterViewChecked");
+  }
+  ngAfterViewInit(): void {
+    console.log("ngAfterViewInit");
+  }
+  ngDoCheck(): void {
+    console.log("ngDoCheck");
+  }
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy");
+  }
+
+  // ng è Angular, On è un event, Init sta per Initialization
+  ngOnInit(): void {
+    console.log("ngOnInit");
+  }
+}
+```
