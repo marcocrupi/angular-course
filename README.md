@@ -2,7 +2,7 @@
 
 Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJBFXJ
 
-## Spiegazione File
+## Spiegazione File - LEZIONE 2
 
 ### FILE "ESTERNI"
 
@@ -65,3 +65,6 @@ npm start
 
 Tutto quello che appare nella home si trova in app.component.html
 
+## Componenti - LEZIONE 3
+
+Il loro punto di forza è che si possono riutilizzare e personalizzare nelle varie parti dell'app.
