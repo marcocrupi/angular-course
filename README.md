@@ -270,3 +270,29 @@ Se succede qualcos'altro, come scambiare dati tra i vari componenti, il componen
 Se ad esempio ci spostassimo su un'altra pagina allora arriverebbe ngOnDestroy.
 
 Quindi un componente nasce, cresce e muore ma nel mezzo fa anche vari controlli, su ognuno di essi possiamo realizzare delle operazioni.
+
+## Data Binding - LEZIONE 6
+
+Se io copio e incollo il componente realizzato precedentemente mi troverò degli elementi tutti uguali nella pagina, ma è molto improbabile che noi abbiamo bisogno di un componente sempre uguale.
+
+Nel caso dell'esempio precedente vogliamo ad esempio che la card sia esteticamente uguale ma mostri diversi tipi di cane per ogni elemento. Quindi vogliamo modificare i dati all'interno.
+
+Viene in nostro aiuto il databinding, che vuole dire legare i dati.  
+
+La parte logica prende il nome di model, ed è quella nel file Typescript del componente, mentre la view è la parte grafica e si trova nel file html. Quindi il databinding consiste nel collegare i dati presenti nella parte logica a ciò che l'utente vede a schermo, ma anche viceversa, perché possiamo collegare i componenti che leghiamo a schermo con ciò che succede dietro.
+
+Il databinding si scompone in due categorie:
+
+* one-way (una direzione): portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
+* two-way (doppia direzione): i dati vengono passati da ambo le parti in contemporanea. 
+
+Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni): 
+
+* String interpolation (interpolazione delle stringhe): serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
+* Property binding: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
+* Event binding: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
+* Two-way binding: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
+
+I primi tre sono one-way mentre l'ultimo come suggerisce il nome è two-way. Quindi esistono 4 modi di fare databinding.
+
+ 

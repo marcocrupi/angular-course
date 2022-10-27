@@ -28,6 +28,9 @@ export class ProvaComponent
     DoCheck,
     OnDestroy
 {
+
+  nomecane = "roger";
+
   constructor() {
     console.log('costruttore');
   }
