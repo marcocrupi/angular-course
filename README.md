@@ -53,3 +53,15 @@ styles.scss (o css) è lo stile globale dell'app.
 
 test.ts serve per il test (non lo useremo in questo corso).
 
+## Lanciare l'app in locale
+
+Per lanciare l'applicazione in locale scrivere nel terminale:
+
+ng serve
+
+Possiamo usare anche il comando:
+
+npm start
+
+Tutto quello che appare nella home si trova in app.component.html
+
