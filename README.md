@@ -133,3 +133,29 @@ Puliamo il file app.component.html e inseriamo semplicemente il selettore:
 ```
 
 Comparirà l'HTML presente nel nostro componente, Angular riconosce in automatico il selettore. Questo perché il componente è nelle declaration presente nel file .ts del componente di default. Posso anche duplicare il componente all'interno della stessa pagina.
+
+## Angular Material Design - LEZIONE 4
+
+Angular Material Design è un framework CSS creato da Google in formato specifico per Angular. 
+
+Il link del progetto è https://material.angular.io/
+
+Apriamo la documentazione di Angular Material: https://material.angular.io/guide/getting-started 
+
+Installiamo con il comando:
+
+ng add @angular/material
+
+Proviamo a mostrare un componente, c'è la relativa sezione "Display a component" nella documentazione.
+
+Come scritto nelle istruzioni dobbiamo fare l'import su app.module.ts.
+
+Copiamo ed incolliamo il tag dello slider nel nostro componente di prova. Potrebbe non vedersi niente perché dobbiamo riavviare il server.
+
+Quando andiamo su un componente in particolare alla voce API troviamo la riga di codice per importare il componente.
+
+Su example abbiamo sia la preview del componente sia la possibilità di copiare il codice in tutte le sue parti, quindi html, css e Typescript.
+
+Potremmo avere un problema sui bottoni se non importiamo l'API dei bottoni, questo perché alcuni componenti sono composti da altri componenti.
+
+Esiste su StackOverflow qualcuno che ha creato un modulo a parte per Angular Material così da non dover ogni volta importare manualmente il codice nel nostro modulo, ciò però richiede soluzioni più avanzate per aggirare i possibili problemi che potrebbero derivare da ciò.
