@@ -16,6 +16,12 @@ karma.conf.js serve per i test.
 
 package-lock.json & package.json sono entrambi legati a node ed ai vari pacchetti. Il package-lock è una versione avanzata del package.json.
 
+README.md serve a farci vedere velocemente come usare Angular.
 
+tsconfig.app.json è la configurazione di Typescript e ci indica i file a cui fa riferimento.
+
+tsconfig.json è la struttura di dati che servono al compilatore Typescript.
+
+tsconfig.spec.json è legata al testing di Typescript.
 
 
