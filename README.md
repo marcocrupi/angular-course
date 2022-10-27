@@ -271,7 +271,7 @@ Se ad esempio ci spostassimo su un'altra pagina allora arriverebbe ngOnDestroy.
 
 Quindi un componente nasce, cresce e muore ma nel mezzo fa anche vari controlli, su ognuno di essi possiamo realizzare delle operazioni.
 
-## Data Binding - LEZIONE 6
+## Databinding - LEZIONE 6
 
 Se io copio e incollo il componente realizzato precedentemente mi troverò degli elementi tutti uguali nella pagina, ma è molto improbabile che noi abbiamo bisogno di un componente sempre uguale.
 
