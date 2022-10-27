@@ -252,3 +252,21 @@ export class ProvaComponent
   }
 }
 ```
+
+Questo è l'ordine in cui appariranno sulla console.
+
+* Dalla console come primo elemento appare il costruttore, dopodiché appare ngOnInit perché il componente deve essere inizializzato. 
+* ngDoCheck fa i vari controlli del caso, se abbiamo delle regole sul check le andrà a rispettare. 
+* ngAfterContentInit dopo che il contenuto è stato inizializzato.
+* ngAfterContentChecked dopo che il contenuto è stato controllato.
+* ngAfterViewInit
+* ngAfterViewChecked
+* ngDoCheck non appena ha finito di inizializzare tutto fa un altro controllo e realizza altri due controlli qui di seguito.
+* ngAfterContentChecked
+* ngAfterViewChecked
+
+Se succede qualcos'altro, come scambiare dati tra i vari componenti, il componente allora subirà dei cambiamenti che faranno partire i vari controlli.
+
+Se ad esempio ci spostassimo su un'altra pagina allora arriverebbe ngOnDestroy.
+
+Quindi un componente nasce, cresce e muore ma nel mezzo fa anche vari controlli, su ognuno di essi possiamo realizzare delle operazioni.
