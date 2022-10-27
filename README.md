@@ -159,3 +159,11 @@ Su example abbiamo sia la preview del componente sia la possibilità di copiare 
 Potremmo avere un problema sui bottoni se non importiamo l'API dei bottoni, questo perché alcuni componenti sono composti da altri componenti.
 
 Esiste su StackOverflow qualcuno che ha creato un modulo a parte per Angular Material così da non dover ogni volta importare manualmente il codice nel nostro modulo, ciò però richiede soluzioni più avanzate per aggirare i possibili problemi che potrebbero derivare da ciò.
+
+## Ciclo di vita dei componenti - LEZIONE 5
+
+Sulla nostra single page application quando cambiamo pagina cambia il contenuto, quindi abbiamo dei componenti che vengono creati e distrutti continuamente.
+
+Schema di un ciclo di vita di un componente:
+
+![alt text](/src/assets/img/component_lifecycle.png)
