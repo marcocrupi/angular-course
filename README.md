@@ -4,6 +4,8 @@ Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJB
 
 ## Spiegazione File - LEZIONE 2
 
+La lezione 1 era solo una panoramica del corso, l'ho esclusa dalla trascrizione del corso.
+
 ### FILE "ESTERNI"
 
 .browserslistrc è un file utilizzato dal sistema di build, per aggiustare il css e il js in base al supporto dei vari browser. Sono elencati i vari browser che vogliamo supportare.
@@ -167,3 +169,23 @@ Sulla nostra single page application quando cambiamo pagina cambia il contenuto,
 Schema di un ciclo di vita di un componente:
 
 ![alt text](/src/assets/img/component_lifecycle.png)
+
+ngOnInit() l'avevamo già incontrato, ed era stato creato automaticamente da Angular non appena abbiamo creato il componente prova.
+
+Non appena viene inizializzato il componente fa un controllo ngDoCheck(). 
+
+Poniamo il caso non ci sia niente in questo controllo si passa a ngAfterContentInit(), il content non è altro che il testo, tutto ciò che è all'interno dei tag html.
+
+Dopo che viene inizializzato il conenuto viene controllato, ngAfterContentChecked().
+
+Dopodiché viene inizializzata la view con ngAfterInit(), la view è la parte visibile del componente, ovvero il risultato finale.
+
+La view viene anch'essa controllata, ngAfterViewChecked(), ed il componente rimane visibile sullo schermo fino a che noi non lo distruggiamo ngOnDestroy.  
+
+I metodi in rosso vengono chiamati una volta sola, ovvero quando il componente viene creato, quelli in verde vengono chiamati ogni volta che succede qualcosa.
+
+ngOnChanges() vuol dire che il nostro componente è sempre in ascolto e che possiamo interagirci. Il componente può mutare e quindi va effettuato un controllo su di esso, ngDoCheck(), va fatto un check sul contenuto per vedere se è cambiato qualcosa, ngAfterContentChecked() ed infine il check sulla view, ngAfterViewChecked().
+
+Questo ciclo di vita ci permette di andare a fare cose mirate quando succedono determinati eventi.
+
+Adesso vediamo in pratica alcuni esempi.
