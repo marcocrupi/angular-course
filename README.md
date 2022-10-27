@@ -94,3 +94,42 @@ export class AppComponent {
   title = 'angular-course';
 }
 ```
+
+Per creare un nuovo componente dobbiamo scrivere nel terminale:
+
+ng g c prova
+
+Dove "g" sta per generate e "c" sta per component.
+
+Verrà generata una cartella con i file tipici dei componenti Angular che abbiamo visto prima. 
+
+Un'altra cosa che è successa è l'update di app.module.ts, potevamo farlo a mano ma con una semplice riga di terminale abbiamo avuto tutto automatizzato. 
+
+Questo è il file .ts che ha generato:
+
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-prova',
+  templateUrl: './prova.component.html',
+  styleUrls: ['./prova.component.scss'],
+})
+
+// Presenta una differenza col component creato di default,
+// c'è OnInit e il costruttore.
+export class ProvaComponent implements OnInit {
+  constructor() {}
+
+  // ng è Angular, On è un event, Init sta per Initialization
+  ngOnInit(): void {}
+}
+```
+
+Puliamo il file app.component.html e inseriamo semplicemente il selettore:  
+
+```html
+<app-prova></app-prova>
+```
+
+Comparirà l'HTML presente nel nostro componente, Angular riconosce in automatico il selettore. Questo perché il componente è nelle declaration presente nel file .ts del componente di default. Posso anche duplicare il componente all'interno della stessa pagina.
