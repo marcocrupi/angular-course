@@ -53,7 +53,7 @@ styles.scss (o css) è lo stile globale dell'app.
 
 test.ts serve per il test (non lo useremo in questo corso).
 
-## Lanciare l'app in locale
+### Lanciare l'app in locale
 
 Per lanciare l'applicazione in locale scrivere nel terminale:
 
@@ -68,3 +68,45 @@ Tutto quello che appare nella home si trova in app.component.html
 ## Componenti - LEZIONE 3
 
 Il loro punto di forza è che si possono riutilizzare e personalizzare nelle varie parti dell'app.
+
+In app abbiamo il primo componente, il fatto che si chiami app.component è perché viene creato da Angular in modo predefinito.
+
+Noi abbiamo tre file ma potremmo averli tutti in app.component.ts, invece preferiamo dividere il codice in 3 file (invece di mettere l'indirizzo del file andrebbe inserito direttamente il codice nei relativi spazi).
+
+Analizziamo il componente che Angular ha creato di default, nello specifico il file app.component.ts:
+
+```js
+function canPlay() {
+  let personName = "Paul";
+  if (true) {
+    personName += " plays football";
+  }
+  console.log(personName);
+}
+
+canPlay();
+```
+
+## 02 - Variabile readonly
+
+L'obiettivo di questo esercizio è quello di rendere `personName` una variabile di sola lettura. Qual è la keyword da utilizzare per dichiarare una variabile `readonly`? L'esercizio risulta corretto se in console si ottiene Uncaught TypeError: `Assignment to constant variable`.
+
+```ts
+import { Component } from '@angular/core';
+
+// Questo è un decorator, serve a decorare le classi in Angular,
+// ci permette di decorare una classe specificando che cos'è, ovvero un componente
+@Component({
+  // Questo selettore punta ad "app-root" che si trova in index.html nel body.
+  selector: 'app-root',
+
+  // Questo è l'HTML del componente.
+  templateUrl: './app.component.html',
+
+  // Questo è il CSS del componente, è un array, ciò ci permette di averne più di uno.
+  styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+  title = 'angular-course';
+}
+```
