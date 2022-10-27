@@ -4,6 +4,8 @@ Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJB
 
 ## Spiegazione File
 
+### FILE ESTERNI
+
 .browserslistrc è un file utilizzato dal sistema di build, per aggiustare il css e il js in base al supporto dei vari browser. Sono elencati i vari browser che vogliamo supportare.
 
 .editorconfig possiamo specificare delle regole per l'editor, sono legate al modo in cui noi andiamo a scrivere.
