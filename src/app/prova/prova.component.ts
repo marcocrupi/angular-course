@@ -18,16 +18,13 @@ import {
 // Presenta una differenza col component creato di default,
 // c'è OnInit e il costruttore.
 // Oltre OnInit che era di default aggiungiamo tutti gli altri controlli del lifecycle.
-export class ProvaComponent
-  implements
-    OnInit,
-    AfterContentChecked,
-    AfterContentInit,
-    AfterViewChecked,
-    AfterViewInit,
-    DoCheck,
-    OnDestroy
-{
+// AfterContentChecked,
+// AfterContentInit,
+// AfterViewChecked,
+// AfterViewInit,
+// DoCheck,
+// OnDestroy
+export class ProvaComponent implements OnInit {
   cani = [
     {
       nome: 'roger',
@@ -40,7 +37,8 @@ export class ProvaComponent
 
   // Proprietà da legare all'attributo disabled in html
   isDisabled = false;
-  immagine = '';
+  immagine =
+    'https://www.carteltec.com/wp-content/uploads/2021/07/1627566486_Berserk-las-noticias-no-son-buenas-sobre-el-futuro-del.jpeg';
   immagine1 =
     'https://gametimers.it/wp-content/uploads/2022/06/Berserk-Riprende-Serializzazione-Dopo-Un-Anno-Morte-Kentaro-Miura-747x420.jpeg.webp';
   immagine2 =
@@ -56,7 +54,7 @@ export class ProvaComponent
     // In questo modo disabilitiamo e abilitiamo il pulsante ogni 2 secondi
     setInterval(() => {
       this.isDisabled = !this.isDisabled;
-    }, 2000);
+    }, 5000);
 
     // In questo modo cambiamo immagine
     let counter = 0;
@@ -67,26 +65,26 @@ export class ProvaComponent
         this.immagine = this.immagine2;
       }
       counter++;
-    }, 1000);
+    }, 5000);
   }
 
   // Tramite la correzione rapida abbiamo implementato tutte le interfacce
-  ngAfterContentChecked(): void {
-    console.log('ngAfterContentChecked');
-  }
-  ngAfterContentInit(): void {
-    console.log('ngAfterContentInit');
-  }
-  ngAfterViewChecked(): void {
-    console.log('ngAfterViewChecked');
-  }
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-  }
-  ngDoCheck(): void {
-    console.log('ngDoCheck');
-  }
-  ngOnDestroy(): void {
-    console.log('ngOnDestroy');
-  }
+  // ngAfterContentChecked(): void {
+  //   console.log('ngAfterContentChecked');
+  // }
+  // ngAfterContentInit(): void {
+  //   console.log('ngAfterContentInit');
+  // }
+  // ngAfterViewChecked(): void {
+  //   console.log('ngAfterViewChecked');
+  // }
+  // ngAfterViewInit(): void {
+  //   console.log('ngAfterViewInit');
+  // }
+  // ngDoCheck(): void {
+  //   console.log('ngDoCheck');
+  // }
+  // ngOnDestroy(): void {
+  //   console.log('ngOnDestroy');
+  // }
 }

@@ -411,3 +411,52 @@ immagine2 =
     }, 1000);
   }
 ```
+
+## Event binding - LEZIONE 9
+
+Event binding vuol dire legare ciò che succede nel nostro componente a livello utente a Typescript.
+
+A questo giro lavoriamo direttamente su app.component.
+
+Inseriamo un bottone, ad esempio questo:
+
+```html
+<button mat-raised-button color="accent">Accent</button>
+```
+
+A questo punto vogliamo aggiungere quello che è un evento, in JavaScript avremmo inserito "onclick" oppure gli addeventListener, Angular ha un suo modo di gestire gli eventi, basta aprire le parentesi tonde per avere la lista completa di essi, a noi interessa click:
+
+```html
+<button mat-raised-button color="accent" (click)="onClick()">Primary</button>
+```
+
+Non ci resta che creare un metodo onClick() nel relativo file .ts:
+
+```ts
+export class AppComponent {
+  title = 'angular-course';
+
+  onClick() {
+    console.log("Ho cliccato");
+  }
+}
+```
+
+Adesso abbiamo le basi per poter fare qualcosa di dinamico, sul click del bottone possiamo cambiare il css e tanto altro.
+
+Per passare dei dati non possiamo fare granché con un bottone, però vediamo una cosa:
+
+```ts
+<button mat-raised-button color="accent" (click)="onClick(this)">Primary</button>
+```
+
+```ts
+export class AppComponent {
+  title = 'angular-course';
+
+  onClick(e: any) {
+    console.log("Ho cliccato");
+    console.log(e);
+  }
+}
+```

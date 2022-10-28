@@ -14,4 +14,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-course';
+
+  onClick(e: any) {
+    console.log("Ho cliccato");
+    console.log(e);
+  }
 }
