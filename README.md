@@ -11,7 +11,9 @@ npm install -g @angular/cli
 Creare un nuovo progetto Angular:
 
 ng new my-first-project
+
 cd my-first-project
+
 ng serve
 
 ## Spiegazione File - LEZIONE 2
