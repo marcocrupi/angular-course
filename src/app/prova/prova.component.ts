@@ -38,9 +38,38 @@ export class ProvaComponent
     },
   ];
 
+  // Proprietà da legare all'attributo disabled in html
+  isDisabled = false;
+  immagine = '';
+  immagine1 =
+    'https://gametimers.it/wp-content/uploads/2022/06/Berserk-Riprende-Serializzazione-Dopo-Un-Anno-Morte-Kentaro-Miura-747x420.jpeg.webp';
+  immagine2 =
+    'https://www.carteltec.com/wp-content/uploads/2021/07/1627566486_Berserk-las-noticias-no-son-buenas-sobre-el-futuro-del.jpeg';
+
   constructor() {
     console.log('costruttore');
   }
+
+  // ng è Angular, On è un event, Init sta per Initialization
+  ngOnInit(): void {
+    console.log('ngOnInit');
+    // In questo modo disabilitiamo e abilitiamo il pulsante ogni 2 secondi
+    setInterval(() => {
+      this.isDisabled = !this.isDisabled;
+    }, 2000);
+
+    // In questo modo cambiamo immagine
+    let counter = 0;
+    setInterval(() => {
+      if (counter % 2 == 0) {
+        this.immagine = this.immagine1;
+      } else {
+        this.immagine = this.immagine2;
+      }
+      counter++;
+    }, 1000);
+  }
+
   // Tramite la correzione rapida abbiamo implementato tutte le interfacce
   ngAfterContentChecked(): void {
     console.log('ngAfterContentChecked');
@@ -59,10 +88,5 @@ export class ProvaComponent
   }
   ngOnDestroy(): void {
     console.log('ngOnDestroy');
-  }
-
-  // ng è Angular, On è un event, Init sta per Initialization
-  ngOnInit(): void {
-    console.log('ngOnInit');
   }
 }

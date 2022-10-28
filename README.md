@@ -255,15 +255,15 @@ export class ProvaComponent
 
 Questo è l'ordine in cui appariranno sulla console.
 
-* Dalla console come primo elemento appare il costruttore, dopodiché appare ngOnInit perché il componente deve essere inizializzato. 
-* ngDoCheck fa i vari controlli del caso, se abbiamo delle regole sul check le andrà a rispettare. 
-* ngAfterContentInit dopo che il contenuto è stato inizializzato.
-* ngAfterContentChecked dopo che il contenuto è stato controllato.
-* ngAfterViewInit
-* ngAfterViewChecked
-* ngDoCheck non appena ha finito di inizializzare tutto fa un altro controllo e realizza altri due controlli qui di seguito.
-* ngAfterContentChecked
-* ngAfterViewChecked
+- Dalla console come primo elemento appare il costruttore, dopodiché appare ngOnInit perché il componente deve essere inizializzato.
+- ngDoCheck fa i vari controlli del caso, se abbiamo delle regole sul check le andrà a rispettare.
+- ngAfterContentInit dopo che il contenuto è stato inizializzato.
+- ngAfterContentChecked dopo che il contenuto è stato controllato.
+- ngAfterViewInit
+- ngAfterViewChecked
+- ngDoCheck non appena ha finito di inizializzare tutto fa un altro controllo e realizza altri due controlli qui di seguito.
+- ngAfterContentChecked
+- ngAfterViewChecked
 
 Se succede qualcos'altro, come scambiare dati tra i vari componenti, il componente allora subirà dei cambiamenti che faranno partire i vari controlli.
 
@@ -277,25 +277,25 @@ Se io copio e incollo il componente realizzato precedentemente mi troverò degli
 
 Nel caso dell'esempio precedente vogliamo ad esempio che la card sia esteticamente uguale ma mostri diversi tipi di cane per ogni elemento. Quindi vogliamo modificare i dati all'interno.
 
-Viene in nostro aiuto il databinding, che vuole dire legare i dati.  
+Viene in nostro aiuto il databinding, che vuole dire legare i dati.
 
 La parte logica prende il nome di model, ed è quella nel file Typescript del componente, mentre la view è la parte grafica e si trova nel file html. Quindi il databinding consiste nel collegare i dati presenti nella parte logica a ciò che l'utente vede a schermo, ma anche viceversa, perché possiamo collegare i componenti che leghiamo a schermo con ciò che succede dietro.
 
 Il databinding si scompone in due categorie:
 
-* one-way (una direzione): portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
-* two-way (doppia direzione): i dati vengono passati da ambo le parti in contemporanea. 
+- one-way (una direzione): portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
+- two-way (doppia direzione): i dati vengono passati da ambo le parti in contemporanea.
 
-Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni): 
+Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni):
 
-* String interpolation (interpolazione delle stringhe): serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
-* Property binding: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
-* Event binding: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
-* Two-way binding: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
+- String interpolation (interpolazione delle stringhe): serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
+- Property binding: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
+- Event binding: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
+- Two-way binding: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
 
 I primi tre sono one-way mentre l'ultimo come suggerisce il nome è two-way. Quindi esistono 4 modi di fare databinding.
 
- ## String interpolation - LEZIONE 7
+## String interpolation - LEZIONE 7
 
 Con string interpolation noi vogliamo mandare a schermo dei dati, la prima cosa da sapere è che string interpolation ci permette di fare l'interpolazione a schermo con qualsiasi cosa che sia una stringa: possiamo inserire una stringa, una proprietà che richiama una stringa e qualsiasi metodo che riporta una stringa, possiamo anche avere dei numeri che però siano convertiti in stringa.
 
@@ -304,15 +304,15 @@ Qui lavoreremo in un'applicazione fittizia ma in un contesto reale i dati arriva
 Creiamo un array di oggetti:
 
 ```ts
-  cani = [
-    {
-      nome: 'roger',
-      razza: 'golden',
-      descrizione: `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
+cani = [
+  {
+    nome: "roger",
+    razza: "golden",
+    descrizione: `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
     from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
     originally bred for hunting.`,
-    },
-  ];
+  },
+];
 ```
 
 Noi vogliamo prendere questi dati che fittizziamente ci sono arrivati dal database.
@@ -323,4 +323,79 @@ Per usare la string interpolation mi sposto sul file html e dove vanno inseriti 
   <mat-card-title>{{ cani[0].nome.toUpperCase() }}</mat-card-title>
 ```
 
-Oltre ad aver richiamato la proprietà dall'oggetto cani, ho applicato ad essa un metodo stringa. 
+Oltre ad aver richiamato la proprietà dall'oggetto cani, ho applicato ad essa un metodo stringa.
+
+Uno dei limiti di questi blocchi con le doppie parentesi graffe è che non possiamo scrivere codice su più righe, quindi non possiamo fare if, for ecc... possiamo sostituire gli if con i ternary operator.
+
+Ricapitolando le string interpolation sono semplicemente due parentesi graffe che si usano sul file html, dentro ci va qualsiasi cosa che può essere convertito in stringa.
+
+## Property binding - LEZIONE 8
+
+Il property binding consiste nel collegare dei dati che abbiamo in Typescript al nostro componente html.
+
+Con questa forma di databinding non vogliamo mandare a schermo direttamente un dato ma vogliamo ad esempio cambiare un'immagine, la funzionalità di un bottone, la classe che gli assegniamo ecc...
+
+Facciamo un esempio inserendo un bottone nell'html del componente (prendiamolo ma Angular Material).
+
+Inseriamo l'attributo disabled nel bottone, possiamo assegnarli o true (pulsante disabilitato, non si può premere) o false (pulsante abilitato, si può premere).
+
+Esempio codice html:
+
+```html
+<button mat-raised-button color="primary" disabled="false">Primary</button>
+```
+
+Questa funzionalità può essere utile quando per esempio vogliamo che questo bottone diventi attivo o venga disabilitato a seconda dello stato di completamento di un form.
+
+Per collegare l'attributo html a una proprietà in typescript dobbiamo usare le parentesi quadre nel codice html e riportare solo il nome della proprietà come valore nel seguente modo:
+
+```html
+<button mat-raised-button color="primary" [disabled]="isDisabled">
+  Primary
+</button>
+```
+
+Con questa porzione di codice Typescript possiamo abilitare e disabilitare il pulsante a intervalli di 2 secondi l'uno dall'altro:
+
+```ts
+ ngOnInit(): void {
+    console.log('ngOnInit');
+    // In questo modo disabilitiamo e abilitiamo il pulsante ogni 2 secondi
+    setInterval(() => {
+      this.isDisabled = !this.isDisabled;
+    }, 2000);
+  }
+```
+
+Questo è un esempio per farci capire come grazie al property binding abbiamo collegato l'attributo disabled alla logica del componente che cambia la proprietà in modo dinamico.
+
+Andiamo a fare un altro esempio usando una card, stavolta voglio cambiare l'immagine al verificarsi di determinate condizioni.
+
+Creiamo due proprietà "immagine1" e "immagine2" con valore dei link diretti a due immagini nel file Typescript.
+
+Creiamo un setInterval come fatto per l'esempio precedente.
+
+Nella card html applicare il property binding su src.
+
+Con il seguente codice possiamo cambiare l'immagine ogni secondo:
+
+```ts
+immagine = "";
+immagine1 =
+  "https://gametimers.it/wp-content/uploads/2022/06/Berserk-Riprende-Serializzazione-Dopo-Un-Anno-Morte-Kentaro-Miura-747x420.jpeg.webp";
+immagine2 =
+  "https://www.carteltec.com/wp-content/uploads/2021/07/1627566486_Berserk-las-noticias-no-son-buenas-sobre-el-futuro-del.jpeg";
+
+  ngOnInit(): void {
+    // In questo modo cambiamo immagine
+    let counter = 0;
+    setInterval(() => {
+      if (counter % 2 == 0) {
+        this.immagine = this.immagine1;
+      } else {
+        this.immagine = this.immagine2;
+      }
+      counter++;
+    }, 1000);
+  }
+```
