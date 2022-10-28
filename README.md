@@ -2,9 +2,19 @@
 
 Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJBFXJ
 
-## Spiegazione File - LEZIONE 2
+## Installazione Angular e creazione progetto - LEZIONE 1
 
-La lezione 1 era solo una panoramica del corso, l'ho esclusa dalla trascrizione del corso.
+Installare Angular CLI:
+
+npm install -g @angular/cli
+
+Creare un nuovo progetto Angular:
+
+ng new my-first-project
+cd my-first-project
+ng serve
+
+## Spiegazione File - LEZIONE 2
 
 ### FILE "ESTERNI"
 
