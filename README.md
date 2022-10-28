@@ -295,4 +295,32 @@ Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni):
 
 I primi tre sono one-way mentre l'ultimo come suggerisce il nome è two-way. Quindi esistono 4 modi di fare databinding.
 
- 
+ ## String interpolation - LEZIONE 7
+
+Con string interpolation noi vogliamo mandare a schermo dei dati, la prima cosa da sapere è che string interpolation ci permette di fare l'interpolazione a schermo con qualsiasi cosa che sia una stringa: possiamo inserire una stringa, una proprietà che richiama una stringa e qualsiasi metodo che riporta una stringa, possiamo anche avere dei numeri che però siano convertiti in stringa.
+
+Qui lavoreremo in un'applicazione fittizia ma in un contesto reale i dati arrivano dal backend.
+
+Creiamo un array di oggetti:
+
+```ts
+  cani = [
+    {
+      nome: 'roger',
+      razza: 'golden',
+      descrizione: `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
+    from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+    originally bred for hunting.`,
+    },
+  ];
+```
+
+Noi vogliamo prendere questi dati che fittizziamente ci sono arrivati dal database.
+
+Per usare la string interpolation mi sposto sul file html e dove vanno inseriti i dati inserisco le doppie parentesi graffe, in esse posso usare una qualunque espressione di typescript, quindi posso metterci dentro una funzione, posso richiamare un valore, usare i ternary operator ecc..
+
+```ts
+  <mat-card-title>{{ cani[0].nome.toUpperCase() }}</mat-card-title>
+```
+
+Oltre ad aver richiamato la proprietà dall'oggetto cani, ho applicato ad essa un metodo stringa. 
