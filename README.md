@@ -595,6 +595,6 @@ Per esempio, nella lezione precedente abbiamo usato ngModel, che non è un attri
 
 Le direttive si dividono in tre categorie:
 
-- Built-in: modificano il comportamento dell'elemento, sono ad esempio NgClass, NgStyle e NgModel: https://angular.io/guide/built-in-directives
-- Attribute (personalizzate): modificano comportamento o apparenza di esso.
-- Structural: cambiano il DOM aggiungendo o rimuovendo elementi, presentano un asterisco, sono *ngIf e *ngFor.
+- **Built-in**: modificano il comportamento dell'elemento, sono ad esempio NgClass, NgStyle e NgModel: https://angular.io/guide/built-in-directives
+- **Attribute (personalizzate)**: modificano comportamento o apparenza di esso.
+- **Structural**: cambiano il DOM aggiungendo o rimuovendo elementi, presentano un asterisco, sono *ngIf e *ngFor.
