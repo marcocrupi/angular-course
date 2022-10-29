@@ -599,7 +599,7 @@ Le direttive si dividono in tre categorie:
 - **Attribute (personalizzate)**: modificano comportamento o apparenza di esso.
 - **Structural**: cambiano il DOM aggiungendo o rimuovendo elementi, presentano un asterisco, sono *ngIf e *ngFor.
 
-## Elementi condizionali con \*ngIF - LEZIONE 12
+## Elementi condizionali con ngIf - LEZIONE 12
 
 ngIf è una direttiva strutturale, tutte le direttive strutturali sono preceduta da un asterisco. Strutturale significa che va a cambiare il DOM, va ad aggiungere o eliminare degli elementi html.
 
