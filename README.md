@@ -1,4 +1,4 @@
-# AngularCourse
+# Corso di Angular
 
 Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJBFXJ
 
