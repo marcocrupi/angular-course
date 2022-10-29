@@ -12,3 +12,22 @@
 </mat-form-field>
 
 <p>{{ inputValue }}</p>
+
+<p *ngIf="isVisible">Ciao sono un paragrafo, esempio ngIf visibile</p>
+<p *ngIf="!isVisible">Ciao sono un paragrafo, esempio ngIf non visibile</p>
+
+
+
+<!-- bloccoElse è una variabile template, un riferimento template
+(template reference) -->
+<ng-template *ngIf="isVisible; then bloccoIf else bloccoElse"></ng-template>
+
+<!-- ng-template è un elemento che vede solo Angular, non ha alcun tipo
+di impatto vero e proprio, è una sorta di contenitore che
+vede solo Angular, necessario per usare la variabile template -->
+<ng-template #bloccoIf>
+  <p>Sono visibile</p>
+</ng-template>
+<ng-template #bloccoElse>
+  <p>Non sono visibile</p>
+</ng-template>

@@ -598,3 +598,77 @@ Le direttive si dividono in tre categorie:
 - **Built-in**: modificano il comportamento dell'elemento, sono ad esempio NgClass, NgStyle e NgModel: https://angular.io/guide/built-in-directives
 - **Attribute (personalizzate)**: modificano comportamento o apparenza di esso.
 - **Structural**: cambiano il DOM aggiungendo o rimuovendo elementi, presentano un asterisco, sono *ngIf e *ngFor.
+
+## Elementi condizionali con \*ngIF - LEZIONE 12
+
+ngIf è una direttiva strutturale, tutte le direttive strutturali sono preceduta da un asterisco. Strutturale significa che va a cambiare il DOM, va ad aggiungere o eliminare degli elementi html.
+
+ngIf ci permette di mostrare o meno un elemento in base ad una condizione.
+
+Facciamo un esempio:
+
+```html
+<p *ngIf="4 < 5">Ciao sono un paragrafo, esempio ngIf</p>
+```
+
+Quindi se 4 e minore di 5 verrà mostrato l'elemento in cui si trova questa direttiva. Se però ad esempio mettiamo 6 < 5, condizione che risulterà falsa, allora l'elemento verrà nascosto.
+
+ATTENZIONE ngIf non fa un display none ma va a creare o meno l'elemento in base alla condizione.
+
+Proviamo adesso con una variabile:
+
+```ts
+isVisible = 15;
+```
+
+```html
+<p *ngIf="isVisible > 10">Ciao sono un paragrafo, esempio ngIf</p>
+```
+
+Ma potremmo anche impostare la variabile su vero o falso per creare o meno l'elemento.
+
+Dentro ngIf possiamo utilizzare gli stessi principi di un normale if. Se volessimo fare una sorta di else:
+
+```ts
+isVisible = true;
+```
+
+```html
+<p *ngIf="isVisible">Ciao sono un paragrafo, esempio ngIf visibile</p>
+<p *ngIf="!isVisible">Ciao sono un paragrafo, esempio ngIf non visibile</p>
+```
+
+Il codice ci dice che se isVisibile è true allora ci mostra il primo elemento, ma se è false allora ci mostra il secondo elemento.
+
+In realtà c'è un costrutto molto più comodo, **ng-template**:
+
+```html
+<!-- bloccoElse è una variabile template, un riferimento template
+(template reference) -->
+<p *ngIf="isVisible; else bloccoElse">Sono visibile</p>
+
+<!-- ng-template è un elemento che vede solo Angular, non ha alcun tipo
+di impatto vero e proprio, è una sorta di contenitore che
+vede solo Angular, necessario per usare la variabile template -->
+<ng-template #bloccoElse><p>Non sono visibile</p></ng-template>
+```
+
+ng-template ci è molto utile perché possiamo creare una sorta di elemento con della logica aggiuntiva. Più avanti andremo ad usare più direttive strutturali che non possono essere sullo stesso elemento.
+
+Esiste anche una variante più completa del codice con ng-template visto prima, che sfrutta then:
+
+```html
+<!-- bloccoElse è una variabile template, un riferimento template
+(template reference) -->
+<ng-template *ngIf="isVisible; then bloccoIf else bloccoElse"></ng-template>
+
+<!-- ng-template è un elemento che vede solo Angular, non ha alcun tipo
+di impatto vero e proprio, è una sorta di contenitore che
+vede solo Angular, necessario per usare la variabile template -->
+<ng-template #bloccoIf>
+  <p>Sono visibile</p>
+</ng-template>
+<ng-template #bloccoElse>
+  <p>Non sono visibile</p>
+</ng-template>
+```

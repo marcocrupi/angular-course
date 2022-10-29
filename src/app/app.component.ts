@@ -27,4 +27,7 @@ export class AppComponent {
     console.log((<HTMLInputElement>e.target).value);
     this.inputValue = (<HTMLInputElement>e.target).value;
   }
+
+  isVisible = true;
+
 }
