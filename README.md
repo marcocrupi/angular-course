@@ -519,7 +519,7 @@ export class AppComponent {
 }
 ```
 
-## Two way binding - LEZIONE 10
+## Two-way binding - LEZIONE 10
 
 Come già detto il two way binding consiste nel collegare la parte logica al componente html da ambo i lati.
 
@@ -560,7 +560,8 @@ Ma questo che abbiamo visto non è two-way binding ma semplicemente event bindin
 Se noi vogliamo cambiare la variabile in modo tale che vada ad aggiornare anche il nostro campo di input, magari al click del bottone dobbiamo fare nel seguente modo:
 
 ```html
-<!-- Per usare insieme il property binding e l'event binding dobbiamo sostituire questo (input)="onInput($event)" con [(ngModel)]="inputValue" colleghiamo quindi l'input direttamente alla proprietà -->
+<!-- Per usare insieme il property binding e l'event binding dobbiamo sostituire 
+questo (input)="onInput($event)" con [(ngModel)]="inputValue" colleghiamo quindi l'input direttamente alla proprietà -->
 <input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="" />
 ```
 
