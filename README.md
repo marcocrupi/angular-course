@@ -565,7 +565,7 @@ questo (input)="onInput($event)" con [(ngModel)]="inputValue" colleghiamo quindi
 <input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="" />
 ```
 
-Una volta digitato ciò ci darà errore, questo perché dobbiamo importare in app.module.ts il modulo di Angular FormsModule. 
+Una volta digitato ciò ci darà errore, questo perché dobbiamo importare in app.module.ts il modulo di Angular FormsModule.
 
 ngModel è una direttiva, argomento che affronteremo nelle prossime lezioni. Questa direttiva dice di connettere ngModel sia in entrata come evento sull'input (cioè quando utilizzo il mio input è un evento), ma quando arriva qualcosa da TypeScript è property binding.
 
@@ -584,3 +584,17 @@ Modifico il metodo onClick() (che è collegato al bottone inserito precedentemen
 ```
 
 Così facendo ogni volta che cliccherò sul bottone andrà a modificare il valore di inputValue, ciò modificherà anche il valore del campo di input visualizzato a schermo.
+
+## Le direttive (directives) - LEZIONE 11
+
+Questa sarà una lezione più teorica, nelle prossime lezioni le vedremo nello specifico.
+
+Le direttive sono classi, servono per essere messe sugli elementi html, per andare a cambiare il comportamento di essi.
+
+Per esempio, nella lezione precedente abbiamo usato ngModel, che non è un attributo html, ma è un qualcosa che è stato aggiunto da Angular. Le direttive cambiano il comportamento dell'elemento.
+
+Le direttive si dividono in tre categorie:
+
+- Built-in: modificano il comportamento dell'elemento, sono ad esempio NgClass, NgStyle e NgModel: https://angular.io/guide/built-in-directives
+- Attribute (personalizzate): modificano comportamento o apparenza di esso.
+- Structural: cambiano il DOM aggiungendo o rimuovendo elementi, presentano un asterisco, sono *ngIf e *ngFor.

@@ -12,7 +12,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
-
 @NgModule({
   declarations: [AppComponent, ProvaComponent],
   imports: [

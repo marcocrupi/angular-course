@@ -19,7 +19,7 @@ export class AppComponent {
   onClick(e: any) {
     console.log('Ho cliccato');
     console.log(e);
-    this.inputValue = "Ho cliccato sul bottone";
+    this.inputValue = 'Ho cliccato sul bottone';
   }
 
   onInput(e: Event) {
