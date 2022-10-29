@@ -6,5 +6,9 @@
   <mat-label>Favorite food</mat-label>
   <!-- $event è una variabile particolare, è proprietaria di Angular, si usa negli eventi,
   vengono registrati qui i dati dell'evento -->
-  <input matInput placeholder="Ex. Pizza" (input)="onInput($event)" value="Sushi">
+  <!-- Per usare insieme il property binding e l'event binding dobbiamo sostituire questo (input)="onInput($event)"
+  con [(ngModel)]="inputValue" colleghiamo quindi l'input direttamente alla proprietà -->
+  <input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="">
 </mat-form-field>
+
+<p>{{ inputValue }}</p>

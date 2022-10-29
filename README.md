@@ -518,3 +518,68 @@ export class AppComponent {
   }
 }
 ```
+
+## Two way binding - LEZIONE 10
+
+Come già detto il two way binding consiste nel collegare la parte logica al componente html da ambo i lati.
+
+Quindi TypeScript influisce sull'html, ma anche quest'ultimo va a cambiare TypeScript.
+
+Torniamo un attimo all'input precedente, vediamo come esso può andare a influenzare altre parti del componente.
+
+Aggiungiamo al codice html il seguente tag con la string interpolation:
+
+```html
+<p>{{ inputValue }}</p>
+```
+
+Nel file TypeScript invece aggiungiamo la proprietà "inputValue" e assegniamogli il valore digitato in input:
+
+```ts
+export class AppComponent {
+  title = "angular-course";
+  inputValue = "Compilare l'input per cambiare questo testo";
+
+  onClick(e: any) {
+    console.log("Ho cliccato");
+    console.log(e);
+  }
+
+  onInput(e: Event) {
+    console.log(e);
+    console.log((<HTMLInputElement>e.target).value);
+    this.inputValue = (<HTMLInputElement>e.target).value;
+  }
+}
+```
+
+Ogni volta che digiteremo qualcosa nel campo di input apparirà in tempo reale sulla pagina html.
+
+Ma questo che abbiamo visto non è two-way binding ma semplicemente event binding.
+
+Se noi vogliamo cambiare la variabile in modo tale che vada ad aggiornare anche il nostro campo di input, magari al click del bottone dobbiamo fare nel seguente modo:
+
+```html
+<!-- Per usare insieme il property binding e l'event binding dobbiamo sostituire questo (input)="onInput($event)" con [(ngModel)]="inputValue" colleghiamo quindi l'input direttamente alla proprietà -->
+<input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="" />
+```
+
+Una volta digitato ciò ci darà errore, questo perché dobbiamo importare in app.module.ts il modulo di Angular FormsModule. 
+
+ngModel è una direttiva, argomento che affronteremo nelle prossime lezioni. Questa direttiva dice di connettere ngModel sia in entrata come evento sull'input (cioè quando utilizzo il mio input è un evento), ma quando arriva qualcosa da TypeScript è property binding.
+
+Quindi grazie alle parentesi tonde che rappesentano l'event binding quando vado a digitare nell'input vado a modificare la proprietà inputValue, ma allo stesso modo, avendo le parentesi quadre, sto facendo property binding, e quindi gli dico, quando inputValue cambia in TypeScript cambia quello che è il value del mio input.
+
+Infatti se vado a guardare la pagina nel campo dell'input troverò il valore definito in TypeScript nella proprietà inputValue.
+
+Modifico il metodo onClick() (che è collegato al bottone inserito precedentemente) nel seguente modo:
+
+```ts
+  onClick(e: any) {
+    console.log('Ho cliccato');
+    console.log(e);
+    this.inputValue = "Ho cliccato sul bottone";
+  }
+```
+
+Così facendo ogni volta che cliccherò sul bottone andrà a modificare il valore di inputValue, ciò modificherà anche il valore del campo di input visualizzato a schermo.

@@ -14,14 +14,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-course';
+  inputValue = "Compilare l'input per cambiare questo testo";
 
   onClick(e: any) {
     console.log('Ho cliccato');
     console.log(e);
+    this.inputValue = "Ho cliccato sul bottone";
   }
 
   onInput(e: Event) {
     console.log(e);
     console.log((<HTMLInputElement>e.target).value);
+    this.inputValue = (<HTMLInputElement>e.target).value;
   }
 }
