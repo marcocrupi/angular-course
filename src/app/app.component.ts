@@ -16,7 +16,12 @@ export class AppComponent {
   title = 'angular-course';
 
   onClick(e: any) {
-    console.log("Ho cliccato");
+    console.log('Ho cliccato');
     console.log(e);
+  }
+
+  onInput(e: Event) {
+    console.log(e);
+    console.log((<HTMLInputElement>e.target).value);
   }
 }

@@ -1,3 +1,10 @@
 <app-prova></app-prova>
 
 <button mat-raised-button color="accent" (click)="onClick(this)">Primary</button>
+
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Favorite food</mat-label>
+  <!-- $event è una variabile particolare, è proprietaria di Angular, si usa negli eventi,
+  vengono registrati qui i dati dell'evento -->
+  <input matInput placeholder="Ex. Pizza" (input)="onInput($event)" value="Sushi">
+</mat-form-field>

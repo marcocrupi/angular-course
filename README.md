@@ -434,7 +434,7 @@ Non ci resta che creare un metodo onClick() nel relativo file .ts:
 
 ```ts
 export class AppComponent {
-  title = 'angular-course';
+  title = "angular-course";
 
   onClick() {
     console.log("Ho cliccato");
@@ -446,17 +446,75 @@ Adesso abbiamo le basi per poter fare qualcosa di dinamico, sul click del botton
 
 Per passare dei dati non possiamo fare granché con un bottone, però vediamo una cosa:
 
-```ts
-<button mat-raised-button color="accent" (click)="onClick(this)">Primary</button>
+```html
+<button mat-raised-button color="accent" (click)="onClick(this)">
+  Primary
+</button>
 ```
 
 ```ts
 export class AppComponent {
-  title = 'angular-course';
+  title = "angular-course";
 
   onClick(e: any) {
     console.log("Ho cliccato");
     console.log(e);
+  }
+}
+```
+
+Questo codice mi permetterà di vedere sulla console il componente, quindi con this possiamo passare il componente.
+
+Con this possiamo andare a prendere l'evento, ciò ha molto più senso con l'input.
+
+Andiamo su Angular Material e importiamo un campo di input in app.component.html.
+
+```html
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Favorite food</mat-label>
+  <!-- $event è una variabile particolare, è proprietaria di Angular, si usa negli eventi,
+  vengono registrati qui i dati dell'evento -->
+  <input
+    matInput
+    placeholder="Ex. Pizza"
+    (input)="onInput($event)"
+    value="Sushi"
+  />
+</mat-form-field>
+```
+
+Creo il metodo onInput() nel file .ts del componente:
+
+```ts
+export class AppComponent {
+  title = "angular-course";
+
+  onInput(e: any) {
+    console.log(e);
+  }
+}
+```
+
+Nella console apparirà il valore immesso nel campo di input. Per ogni carattere che viene inserito troviamo un sacco di informazioni riportate in questa variabile. Tra le informazioni che a noi interessano maggiormente in questa variabile è il value, per recuperare il valore dovremmo scrivere nel seguente modo:
+
+```ts
+export class AppComponent {
+  title = "angular-course";
+
+  onInput(e: any) {
+    console.log(e.target.value);
+  }
+}
+```
+
+Il tipo "any" però in questo contesto non va bene, è troppo generico, dobbiamo modificarlo, possiamo assegnare il tipo "Event". Facendo così però darà errore su e.target.value, in questo caso va fatto un casting, che altro non è che una conversione. Dobbiamo modificare il codice nel seguente modo:
+
+```ts
+export class AppComponent {
+  title = "angular-course";
+
+  onInput(e: any) {
+    console.log((<HTMLInputElement>e.target).value);
   }
 }
 ```
