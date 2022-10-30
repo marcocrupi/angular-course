@@ -37,4 +37,7 @@ export class AppComponent {
     { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true },
     { nome: 'Maccio', cognome: 'Capatonda', isOnline: false },
   ];
+
+  numero = 3;
+  stringa = "Topolino";
 }

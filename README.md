@@ -802,3 +802,45 @@ Eccole applicate al nostro codice:
   <span class="cerchioArancione" *ngIf="i > 2"></span>
 </p>
 ```
+
+## Condizioni multiple con ngSwitch - LEZIONE 14
+
+Riprende le funzionalità del condizionale Swith di JavaScript, vediamolo subito in azione:
+
+```ts
+numero = 3;
+```
+
+```html
+<!-- Non è una direttiva strutturale, perché non è ngSwitch
+a modificare direttamente il DOM ma solleva solo casistiche,
+facciamo riferimento alla variabile numero -->
+<div [ngSwitch]="numero">
+  <!-- Inseriamo un paragrafo per ogni condizione da
+  notare che è *ngSwitchCase la direttiva struttura
+  che fa riferimento alla direttiva [ngSwitch] -->
+  <p *ngSwitchCase="1">Uno</p>
+  <p *ngSwitchCase="2">Due</p>
+  <p *ngSwitchCase="3">Tre</p>
+  <p *ngSwitchCase="4">Quattro</p>
+  <p *ngSwitchDefault>Default</p>
+</div>
+```
+
+Vediamo ngSwitch con le stringhe:
+
+```ts
+stringa = "Topolino";
+```
+
+```html
+<div [ngSwitch]="stringa">
+  <!-- Se lasciamo solo le normali virgolette ci darà errore, dobbiamo
+  inserire delle virgolette aggiuntive -->
+  <p *ngSwitchCase="'Pippo'">Pippo</p>
+  <p *ngSwitchCase="'Pluto'">Pluto</p>
+  <p *ngSwitchCase="'Topolino'">Topolino</p>
+  <p *ngSwitchCase="'Paperino'">Paperina</p>
+  <p *ngSwitchDefault>Default</p>
+</div>
+```
