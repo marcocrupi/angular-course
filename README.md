@@ -844,3 +844,108 @@ stringa = "Topolino";
   <p *ngSwitchDefault>Default</p>
 </div>
 ```
+
+## Stile condizionale con ngStyle - LEZIONE 15
+
+ngStyle è una direttiva che ci permette di cambiare lo stile CSS di un elemento in base ai dati del nostro componente.
+
+Prepariamo il codice:
+
+```html
+<ul>
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <div class="cerchio"></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```
+
+```scss
+li.ngStyleEs {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+  }
+  .cerchio {
+    margin-right: 10px;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-color: rgb(0, 4, 255);
+    border-radius: 20px;
+  }
+}
+```
+
+Comparirà una lista di nomi con un cerchio blu alla loro sinistra. Noi vogliamo che il cerchio cambi colore in base allo stato della persona, ovvero se è online o non online.
+
+Vediamo come fare, più avanti vedremo ngClass, dove andremo a cambiare direttamente la classe, a questo giro modifichiamo direttamente lo stile:
+
+```html
+<ul>
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <!-- Facciamo il property binding inserendo la nostra direttiva [ngStyle],
+    possiamo decidere se cambiare lo stile usando la dicitura ad esempio
+    marginBottom oppure usare la dicitura css inserendo le virgolette 'margin-bottom' -->
+    <div class="cerchio" [ngStyle]="{'background-color':'red'}"></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```
+
+In questo modo i pallini sono diventati rossi, ma noi possiamo anche collegare background-color a una variabile:
+
+```ts
+color = "green";
+```
+
+```html
+<ul>
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <div class="cerchio" [ngStyle]="{ 'background-color': color }"></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```
+
+I pallini diventeranno verdi. Il prossimo step è prendere il colore direttamente dallo stato delle persone, usiamo il ternary operator (potremmo anche usare un metodo):
+
+```html
+<ul>
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <div
+      class="cerchio"
+      [ngStyle]="{ 'background-color': persona.isOnline ? color : 'red' }"
+    ></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```
+
+Con ngFor abbiamo duplicato gli elementi in base ai dati ricevuti, con la string interpolation abbiamo mandato a schermo i dati effettivi e con ngStyle abbiamo letteralmente cambiato il colore in base allo status della persona.
+
+Potremmo anche prendere il colore direttamente dall'array:
+
+```ts
+ persone = [
+    { nome: 'Luca', cognome: 'Rossi', isOnline: true, color: 'blue' },
+    { nome: 'Marco', cognome: 'Verdi', isOnline: false, color: 'red' },
+    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false, color: 'yellow' },
+    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true, color: 'green' },
+    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
+  ];
+```
+
+```html
+<ul>
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <div
+      class="cerchio"
+      [ngStyle]="{ 'background-color': persona.color }"
+    ></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```

@@ -31,13 +31,14 @@ export class AppComponent {
   isVisible = true;
 
   persone = [
-    { nome: 'Luca', cognome: 'Rossi', isOnline: true },
-    { nome: 'Marco', cognome: 'Verdi', isOnline: false },
-    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false },
-    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true },
-    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false },
+    { nome: 'Luca', cognome: 'Rossi', isOnline: true, color: 'blue' },
+    { nome: 'Marco', cognome: 'Verdi', isOnline: false, color: 'red' },
+    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false, color: 'yellow' },
+    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true, color: 'green' },
+    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
   ];
 
   numero = 3;
-  stringa = "Topolino";
+  stringa = 'Topolino';
+  color = 'green';
 }

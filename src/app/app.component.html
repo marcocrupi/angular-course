@@ -88,3 +88,26 @@ facciamo riferimento alla variabile numero -->
   <p *ngSwitchCase="'Paperino'">Paperina</p>
   <p *ngSwitchDefault>Default</p>
 </div>
+
+<ul>
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <!-- Facciamo il property binding inserendo la nostra direttiva [ngStyle],
+    possiamo decidere se cambiare lo stile usando la dicitura ad esempio
+    marginBottom oppure usare la dicitura css inserendo le virgolette 'margin-bottom' -->
+    <div
+      class="cerchio"
+      [ngStyle]="{ 'background-color': persona.isOnline ? color : 'red' }"
+    ></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+
+<ul [ngStyle]="{ 'margin-top': '50px' }">
+  <li class="ngStyleEs" *ngFor="let persona of persone">
+    <div
+      class="cerchio"
+      [ngStyle]="{ 'background-color': persona.color }"
+    ></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>

@@ -1,5 +1,5 @@
 .cerchioVerde {
-  display:inline-block;
+  display: inline-block;
   height: 10px;
   width: 10px;
   background-color: green;
@@ -7,7 +7,7 @@
 }
 
 .cerchioRosso {
-  display:inline-block;
+  display: inline-block;
   height: 10px;
   width: 10px;
   background-color: red;
@@ -15,9 +15,26 @@
 }
 
 .cerchioArancione {
-  display:inline-block;
+  display: inline-block;
   height: 10px;
   width: 10px;
   background-color: orange;
   border-radius: 20px;
+}
+
+li.ngStyleEs {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+  }
+  .cerchio {
+    margin-right: 10px;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-color: rgb(0, 4, 255);
+    border-radius: 20px;
+  }
 }
