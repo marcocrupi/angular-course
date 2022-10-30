@@ -30,4 +30,11 @@ export class AppComponent {
 
   isVisible = true;
 
+  persone = [
+    { nome: 'Luca', cognome: 'Rossi', isOnline: true },
+    { nome: 'Marco', cognome: 'Verdi', isOnline: false },
+    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false },
+    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true },
+    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false },
+  ];
 }

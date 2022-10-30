@@ -672,3 +672,133 @@ vede solo Angular, necessario per usare la variabile template -->
   <p>Non sono visibile</p>
 </ng-template>
 ```
+
+## Creare elementi con ngFor - LEZIONE 13
+
+È una direttiva strutturale che ci permette di ciclare dei dati che abbiamo e su questo costruire degli elementi.
+
+In questo esempio prenderemo un array di dati e li manderemo a schermo.
+
+Creaimo una lista per stampare l'array a schermo, verrà in nostro aiuto ngFor:
+
+```ts
+persone = [
+  { nome: "Luca", cognome: "Rossi" },
+  { nome: "Marco", cognome: "Verdi" },
+  { nome: "Anna", cognome: "Neri" },
+];
+```
+
+```html
+<ul>
+  <!-- Con ngFor creiamo un solo elemento come
+  stampino, in cui per ogni volta che trova un
+  dato ricrea lo stesso elemento ma cambiando
+  i dati all'intenro -->
+  <li *ngFor="let persona of persone">
+    {{ persona.nome }} {{ persona.cognome }}
+  </li>
+</ul>
+```
+
+Noi abbiamo usato un li come elemento, ma avrebbe funzionato anche con un div o qualsiasi altro elemento, proviamo con il tag p:
+
+```html
+<p *ngFor="let persona of persone">
+  <strong>{{ persona.nome }}</strong> {{ persona.cognome }}
+</p>
+```
+
+Dovete immaginare che invece di applicare ngFor a un array scritto da noi, lo facciamo coi dati JSON in arrivo dal server.
+
+Facciamo finta sia una chat, dove se la persona è online andiamo a mettere un pallino verde:
+
+```ts
+persone = [
+  { nome: "Luca", cognome: "Rossi", isOnline: true },
+  { nome: "Marco", cognome: "Verdi", isOnline: false },
+  { nome: "Anna", cognome: "Pannocchia", isOnline: false },
+  { nome: "Leonardo", cognome: "Sciascia", isOnline: true },
+  { nome: "Maccio", cognome: "Capatonda", isOnline: false },
+];
+```
+
+```html
+<p *ngFor="let persona of persone">
+  {{ persona.nome }} {{ persona.cognome }}
+  <span class="cerchioVerde" *ngIf="persona.isOnline"></span
+  ><span class="cerchioRosso" *ngIf="!persona.isOnline"></span>
+</p>
+```
+
+```scss
+.cerchioVerde {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 20px;
+}
+
+.cerchioRosso {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 20px;
+}
+```
+
+Vediamo come prendere altri dati del ciclo, come ad esempio l'indice:
+
+```html
+<p *ngFor="let persona of persone; index as i">
+  {{ persona.nome }} {{ persona.cognome }} - index: {{i}} - status:
+  <span class="cerchioVerde" *ngIf="persona.isOnline"></span
+  ><span class="cerchioRosso" *ngIf="!persona.isOnline"></span>
+</p>
+```
+
+Potremmo usare l'indice in un condizionale, dove ad esempio il cerchio arancione (non c'è bisogno che mostro anche il css) appare solo dove l'indice è maggiore di 2:
+
+```html
+<p *ngFor="let persona of persone; index as i">
+  {{ persona.nome }} {{ persona.cognome }} - index: {{i}} - status:
+  <span class="cerchioVerde" *ngIf="persona.isOnline"></span
+  ><span class="cerchioRosso" *ngIf="!persona.isOnline"></span>
+  <span class="cerchioArancione" *ngIf="i > 2"></span>
+</p>
+```
+
+Tra le altre variabili che potremmo prendere troviamo:
+
+- **count**, che prende tutta la lunghezza dell'array.
+- **first**, restituisce true sul primo elemento dell'array e false negli altri.
+- **last**, restituisce true nell'ultimo elemento dell'array e false negli altri.
+- **even**, restituisce true sugli elementi pari e false sui dispari.
+- **odd**, restituisce true sugli elementi dispari e false sui pari.
+
+Le variabili sono presenti sulla documentazione: https://angular.io/api/common/NgFor
+
+Eccole applicate al nostro codice:
+
+```html
+<p
+  *ngFor="
+    let persona of persone;
+    index as i;
+    count as c;
+    first as isFirst;
+    last as isLast;
+    even as isEven;
+    odd as isOdd
+  "
+>
+  {{ persona.nome }} {{ persona.cognome }} - index: {{ i }} - count: {{ c }} -
+  first: {{ isFirst }} - last: {{ isLast }} - even(pari): {{ isEven }} -
+  odd(dispari): {{ isOdd }} - status:
+  <span class="cerchioVerde" *ngIf="persona.isOnline"></span
+  ><span class="cerchioRosso" *ngIf="!persona.isOnline"></span>
+  <span class="cerchioArancione" *ngIf="i > 2"></span>
+</p>
+```

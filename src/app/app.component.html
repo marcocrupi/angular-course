@@ -1,6 +1,8 @@
 <app-prova></app-prova>
 
-<button mat-raised-button color="accent" (click)="onClick(this)">Primary</button>
+<button mat-raised-button color="accent" (click)="onClick(this)">
+  Primary
+</button>
 
 <mat-form-field class="example-full-width" appearance="fill">
   <mat-label>Favorite food</mat-label>
@@ -8,7 +10,7 @@
   vengono registrati qui i dati dell'evento -->
   <!-- Per usare insieme il property binding e l'event binding dobbiamo sostituire questo (input)="onInput($event)"
   con [(ngModel)]="inputValue" colleghiamo quindi l'input direttamente alla proprietà -->
-  <input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="">
+  <input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="" />
 </mat-form-field>
 
 <p>{{ inputValue }}</p>
@@ -16,11 +18,9 @@
 <p *ngIf="isVisible">Ciao sono un paragrafo, esempio ngIf visibile</p>
 <p *ngIf="!isVisible">Ciao sono un paragrafo, esempio ngIf non visibile</p>
 
-
-
 <!-- bloccoElse è una variabile template, un riferimento template
 (template reference) -->
-<ng-template *ngIf="isVisible; then bloccoIf else bloccoElse"></ng-template>
+<ng-template *ngIf="isVisible; then bloccoIf; else bloccoElse"></ng-template>
 
 <!-- ng-template è un elemento che vede solo Angular, non ha alcun tipo
 di impatto vero e proprio, è una sorta di contenitore che
@@ -31,3 +31,36 @@ vede solo Angular, necessario per usare la variabile template -->
 <ng-template #bloccoElse>
   <p>Non sono visibile</p>
 </ng-template>
+
+<ul>
+  <!-- Con ngFor creiamo un solo elemento come
+  stampino, in cui per ogni volta che trova un
+  dato ricrea lo stesso elemento ma cambiando
+  i dati all'intenro -->
+  <li *ngFor="let persona of persone">
+    {{ persona.nome }} {{ persona.cognome }}
+  </li>
+</ul>
+
+<p *ngFor="let persona of persone">
+  <strong>{{ persona.nome }}</strong> {{ persona.cognome }}
+</p>
+
+<p
+  *ngFor="
+    let persona of persone;
+    index as i;
+    count as c;
+    first as isFirst;
+    last as isLast;
+    even as isEven;
+    odd as isOdd
+  "
+>
+  {{ persona.nome }} {{ persona.cognome }} - index: {{ i }} - count: {{ c }} -
+  first: {{ isFirst }} - last: {{ isLast }} - even(pari): {{ isEven }} -
+  odd(dispari): {{ isOdd }} - status:
+  <span class="cerchioVerde" *ngIf="persona.isOnline"></span
+  ><span class="cerchioRosso" *ngIf="!persona.isOnline"></span>
+  <span class="cerchioArancione" *ngIf="i > 2"></span>
+</p>
