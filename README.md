@@ -929,13 +929,13 @@ Con ngFor abbiamo duplicato gli elementi in base ai dati ricevuti, con la string
 Potremmo anche prendere il colore direttamente dall'array:
 
 ```ts
- persone = [
-    { nome: 'Luca', cognome: 'Rossi', isOnline: true, color: 'blue' },
-    { nome: 'Marco', cognome: 'Verdi', isOnline: false, color: 'red' },
-    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false, color: 'yellow' },
-    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true, color: 'green' },
-    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
-  ];
+persone = [
+  { nome: "Luca", cognome: "Rossi", isOnline: true, color: "blue" },
+  { nome: "Marco", cognome: "Verdi", isOnline: false, color: "red" },
+  { nome: "Anna", cognome: "Pannocchia", isOnline: false, color: "yellow" },
+  { nome: "Leonardo", cognome: "Sciascia", isOnline: true, color: "green" },
+  { nome: "Maccio", cognome: "Capatonda", isOnline: false, color: "purple" },
+];
 ```
 
 ```html
@@ -945,6 +945,81 @@ Potremmo anche prendere il colore direttamente dall'array:
       class="cerchio"
       [ngStyle]="{ 'background-color': persona.color }"
     ></div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```
+
+## Classi dinamiche con ngClass - LEZIONE 16
+
+Vediamo come possiamo cambiare una classe invece di cambiare tutto lo stile a mano.
+
+Abbiamo inserito il numero dell'indice dentro ogni pallino, vogliamo che cambi il colore in base allo stato, dettato dalla proprietà isOnline.
+
+```scss
+li.ngStyleEs {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+  }
+  .cerchio {
+    margin-right: 10px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(0, 4, 255);
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .cerchioOnline {
+    background-color: green;
+    color: white;
+  }
+
+  .cerchioOffline {
+    background-color: red;
+    color: blue;
+  }
+}
+```
+
+```html
+<ul [ngStyle]="{ 'margin-top': '50px' }">
+  <li class="ngStyleEs" *ngFor="let persona of persone; index as i">
+    <!-- In ngClass possiamo aggiungere anche più classi manualmente,
+    ad esempio [ngClass]="'cerchioOffline cerchioOnline'", c'è la
+    possibilità di inserirle anche in un array, ma a noi non interessa,
+    ci interessa la parte condizionale -->
+    <div
+      class="cerchio"
+      [ngClass]="{
+        'cerchioOnline secondaClasse': persona.isOnline,
+        cerchioOffline: !persona.isOnline
+      }"
+    >
+      {{ i }}
+    </div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
+```
+
+Nell'esempio appena fatto abbiamo la possibilità di usare più condizioni, mentre se abbiamo una sola condizione possiamo usare il ternary operator, che nel nostro caso sarebbe:
+
+```html
+<ul [ngStyle]="{ 'margin-top': '50px' }">
+  <li class="ngStyleEs" *ngFor="let persona of persone; index as i">
+    <div
+      class="cerchio"
+      [ngClass]="persona.isOnline ? 
+      'cerchioOnline :
+      'cerchioOffline'"
+    >
+      {{ i }}
+    </div>
     <p>{{ persona.nome }} {{ persona.cognome }}</p>
   </li>
 </ul>

@@ -111,3 +111,22 @@ facciamo riferimento alla variabile numero -->
     <p>{{ persona.nome }} {{ persona.cognome }}</p>
   </li>
 </ul>
+
+<ul [ngStyle]="{ 'margin-top': '50px' }">
+  <li class="ngStyleEs" *ngFor="let persona of persone; index as i">
+    <!-- In ngClass possiamo aggiungere anche più classi manualmente,
+    ad esempio [ngClass]="'cerchioOffline cerchioOnline'", c'è la
+    possibilità di inserirle anche in un array, ma a noi non interessa,
+    ci interessa la parte condizionale -->
+    <div
+      class="cerchio"
+      [ngClass]="{
+        'cerchioOnline secondaClasse': persona.isOnline,
+        cerchioOffline: !persona.isOnline
+      }"
+    >
+      {{ i }}
+    </div>
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </li>
+</ul>
