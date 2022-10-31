@@ -1024,3 +1024,121 @@ Nell'esempio appena fatto abbiamo la possibilità di usare più condizioni, ment
   </li>
 </ul>
 ```
+
+## Come passare dei dati da un componente Parent a un Child - LEZIONE 17
+
+Per componente Child si intende un componente contenuto all'interno di un altro componente.
+
+Nel nostro esempio, in app.component.html abbiamo il componente app-prova, noi vogliamo passargli i dati di app.component.ts.
+
+app.component.ts
+
+```ts
+persone = [
+  { nome: "Luca", cognome: "Rossi", isOnline: true, color: "blue" },
+  { nome: "Marco", cognome: "Verdi", isOnline: false, color: "red" },
+  { nome: "Anna", cognome: "Pannocchia", isOnline: false, color: "yellow" },
+  { nome: "Leonardo", cognome: "Sciascia", isOnline: true, color: "green" },
+  { nome: "Maccio", cognome: "Capatonda", isOnline: false, color: "purple" },
+];
+```
+
+app.component.html
+
+```html
+<!-- Per passare la variabile persone in app.component.ts
+a prova.component dobbiamo usare il property binding -->
+<app-prova [data]="persone"></app-prova>
+```
+
+prova.component.ts
+
+```ts
+// Quando si scrive, dovrebbe essere importato automaticamente
+// da Angular. La variabile data quindi ha un decoratore chiamato
+// Input, perché il suo valore arriva dall'esterno.
+@Input() data: any;
+
+ngOnInit(): void {
+    console.log('Dati passati da app.component:', this.data);
+  }
+```
+
+prova.component.html
+
+```html
+<div [ngStyle]="{ 'margin': '50px 0' }">
+  <div *ngFor="let persona of data">
+    <p [ngStyle]="{ color: persona.color }">
+      {{ persona.nome }} {{ persona.cognome }}
+    </p>
+  </div>
+</div>
+```
+
+Essendoci il property binding su data, vuol dire che quando cambiano i dati delle persone cambiano anche in data. Facciamo un esperimento:
+
+app.component.ts
+
+```ts
+onClickChangePersone() {
+    this.persone = [
+      {
+        nome: 'Luca Change',
+        cognome: 'Rossi',
+        isOnline: true,
+        color: 'blue',
+      },
+      {
+        nome: 'Marco Change',
+        cognome: 'Verdi',
+        isOnline: false,
+        color: 'red',
+      },
+      {
+        nome: 'Anna Change',
+        cognome: 'Pannocchia',
+        isOnline: false,
+        color: 'yellow',
+      },
+      {
+        nome: 'Leonardo Change',
+        cognome: 'Sciascia',
+        isOnline: true,
+        color: 'green',
+      },
+      {
+        nome: 'Maccio Change',
+        cognome: 'Capatonda',
+        isOnline: false,
+        color: 'purple',
+      },
+    ];
+  }
+```
+
+app.component.html
+
+```html
+<button (click)="onClickChangePersone()">Cambio Persone</button>
+```
+
+Cliccando sul bottone vengono cambiati i valori delle proprietà in persone e questi cambiamenti si riflettono anche su data, così facendo prova.component manda a schermo i nuovi valori.
+
+Come facciamo a "prendere" i vari cambiamenti? Con onChanges:
+
+prova.component.ts 
+
+```ts
+export class ProvaComponent implements OnInit, OnChanges {
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    // In questo modo riportiamo su console i vari cambiamenti
+    // del componente.
+    console.log(changes)
+  }
+```
+
+In questo codice ho riportato solo le parti aggiunte relative ad OnChanges.
+
+Pensate a un componente che continua a cambiare, noi grazie a OnChanges abbiamo accesso a molte informazioni, questa fase del ciclo di vita del componente ci permette di far succedere cose ogni volta che il componente cambia, per esempio potremmo far cambiare il layout html al cambiamento di un determinato valore.

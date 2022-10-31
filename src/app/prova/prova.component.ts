@@ -5,8 +5,11 @@ import {
   AfterViewInit,
   Component,
   DoCheck,
+  Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 
 @Component({
@@ -24,7 +27,7 @@ import {
 // AfterViewInit,
 // DoCheck,
 // OnDestroy
-export class ProvaComponent implements OnInit {
+export class ProvaComponent implements OnInit, OnChanges {
   cani = [
     {
       nome: 'roger',
@@ -48,6 +51,11 @@ export class ProvaComponent implements OnInit {
     console.log('costruttore');
   }
 
+  // Quando si scrive, dovrebbe essere importato automaticamente
+  // da Angular. La variabile data quindi ha un decoratore chiamato
+  // Input, perché il suo valore arriva dall'esterno.
+  @Input() data: any;
+
   // ng è Angular, On è un event, Init sta per Initialization
   ngOnInit(): void {
     console.log('ngOnInit');
@@ -66,6 +74,14 @@ export class ProvaComponent implements OnInit {
       }
       counter++;
     }, 5000);
+
+    console.log('Dati passati da app.component:', this.data);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // In questo modo riportiamo su console i vari cambiamenti
+    // del componente.
+    console.log(changes)
   }
 
   // Tramite la correzione rapida abbiamo implementato tutte le interfacce

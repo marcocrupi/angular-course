@@ -1,4 +1,8 @@
-<app-prova></app-prova>
+<!-- Per passare la variabile persone in app.component.ts
+a prova.component dobbiamo usare il property binding -->
+<app-prova [data]="persone"></app-prova>
+
+<button (click)="onClickChangePersone()">Cambio Persone</button>
 
 <button mat-raised-button color="accent" (click)="onClick(this)">
   Primary

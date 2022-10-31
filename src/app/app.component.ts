@@ -38,6 +38,41 @@ export class AppComponent {
     { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
   ];
 
+  onClickChangePersone() {
+    this.persone = [
+      {
+        nome: 'Luca Change',
+        cognome: 'Rossi',
+        isOnline: true,
+        color: 'blue',
+      },
+      {
+        nome: 'Marco Change',
+        cognome: 'Verdi',
+        isOnline: false,
+        color: 'red',
+      },
+      {
+        nome: 'Anna Change',
+        cognome: 'Pannocchia',
+        isOnline: false,
+        color: 'yellow',
+      },
+      {
+        nome: 'Leonardo Change',
+        cognome: 'Sciascia',
+        isOnline: true,
+        color: 'green',
+      },
+      {
+        nome: 'Maccio Change',
+        cognome: 'Capatonda',
+        isOnline: false,
+        color: 'purple',
+      },
+    ];
+  }
+
   numero = 3;
   stringa = 'Topolino';
   color = 'green';
