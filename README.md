@@ -1143,7 +1143,7 @@ In questo codice ho riportato solo le parti aggiunte relative ad OnChanges.
 
 Pensate a un componente che continua a cambiare, noi grazie a OnChanges abbiamo accesso a molte informazioni, questa fase del ciclo di vita del componente ci permette di far succedere cose ogni volta che il componente cambia, per esempio potremmo far cambiare il layout html al cambiamento di un determinato valore.
 
-## Passare dati da componente Child al Parent - LEZIONE 18
+## Passare dati da un componente Child al Parent - LEZIONE 18
 
 prova.component.ts
 
