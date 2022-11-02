@@ -1127,11 +1127,11 @@ Cliccando sul bottone vengono cambiati i valori delle proprietà in persone e qu
 
 Come facciamo a "prendere" i vari cambiamenti? Con onChanges:
 
-prova.component.ts 
+prova.component.ts
 
 ```ts
 export class ProvaComponent implements OnInit, OnChanges {
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     // In questo modo riportiamo su console i vari cambiamenti
     // del componente.
@@ -1175,7 +1175,10 @@ app.component.html
 componente child dobbiamo usare l'event binding,
 useremo però un evento custom, il quale mette in ascolto il
 componente app.component per l'evento "mandaDatiFuori" -->
-<app-prova [data]="persone" (mandaDatiEvento)="onRiceviDati($event)"></app-prova>
+<app-prova
+  [data]="persone"
+  (mandaDatiEvento)="onRiceviDati($event)"
+></app-prova>
 ```
 
 app.component.ts
@@ -1186,6 +1189,70 @@ app.component.ts
   }
 ```
 
-Ricapitolando per passare i dati da Parent a Child si usa il property binding, mentre da Child a Parent si usa l'event binding. 
+Ricapitolando per passare i dati da Parent a Child si usa il property binding, mentre da Child a Parent si usa l'event binding.
 
 Oltre questo sistema esiste un modo più approprieto per farlo su larga scala quando i componenti sono molti e complessi, lo vedremo nelle prossime lezioni.
+
+## Le variabili Template - LEZIONE 19
+
+Abbiamo visto le variabili template nella lezione 12,oggi vediamo come possiamo prendere la variabile template, quindi il riferimento all'elemento HTML, in typescript, questo è un metodo che si usa per puntare al form.
+
+Abbiamo già visto come collegare direttamente un input a una variabile in TypeScript, ora vediamo come poter pescare i valori di input sul click, senza dover collegare per forza una variabile.
+
+app.component.html
+
+```html
+<!-- #inputSaluti è una variabile di template -->
+<input #inputSaluti value="ciao" />
+```
+
+Per prendere la variabile di template nel file html dobbiamo utilizzare un decoratore:
+
+app.component.ts
+
+```ts
+// È un decoratore che ci dice che c'è un figlio della view,
+// che si chiama inputSaluti, aggiungendo il punto esclamativo
+// assicuriamo TypeScript sul fatto che il valore non sarà
+// mai null o undefined
+  @ViewChild('inputSaluti') inputSaluti!: ElementRef<HTMLInputElement>;
+
+  // Ci restituirà undefined, perché a ngOnInit il componente viene
+  // inizializzato, non c'è ancora niente
+  ngOnInit(): void {
+    console.log('ngOnInit inputSaluti:', this.inputSaluti);
+  }
+
+  // ngAfterViewInit il console.log ci darà il nostro riferimento all'elemeto
+  // questo è il modo corretto per accedere al ViewChild
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewInit inputSaluti:', this.inputSaluti);
+  }
+```
+
+Con questo sistema, parlando di un ipotetico form, usando ViewChild, invece di creare una variabile per ogni campo di input ne creiamo una sola che prenda tutto il form.
+
+Creiamo un bottone e il relativo evento:
+
+app.component.html
+
+```html
+<input #inputSaluti value="ciao">
+<button (click)="onClickView()">Invia</button>
+```
+
+```ts
+  onClickView() {
+    console.log('onClickView inputSaluti:', this.inputSaluti);
+  };
+```
+
+Anche in questo caso il console.log stamperà ElementRef, il quale è un riferimento dell'elemento, che porta con se un nativeElement, aprendolo vedremo una serie di dati, quello che interessa a noi è value.   
+
+Per prendere sto valore dobbiamo quindi fare:
+
+```ts
+ onClickView() {
+    console.log('onClickView inputSaluti:', this.inputSaluti.nativeElement.value);
+  };
+```

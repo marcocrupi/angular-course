@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  OnInit,
+  AfterViewInit,
+} from '@angular/core';
 
 // Questo è un decorator, serve a decorare le classi in Angular,
 // ci permette di decorare una classe specificando che cos'è, ovvero un componente
@@ -12,7 +18,7 @@ import { Component } from '@angular/core';
   // Questo è il CSS del componente, è un array, ciò ci permette di averne più di uno.
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'angular-course';
   inputValue = "Compilare l'input per cambiare questo testo";
 
@@ -79,5 +85,30 @@ export class AppComponent {
 
   onRiceviDati(value: string) {
     console.log(value);
+  }
+
+  // È un decoratore che ci dice che c'è un figlio della view,
+  // che si chiama inputSaluti, aggiungendo il punto esclamativo
+  // assicuriamo TypeScript sul fatto che il valore non sarà
+  // mai null o undefined
+  @ViewChild('inputSaluti') inputSaluti!: ElementRef<HTMLInputElement>;
+
+  // Ci restituirà undefined, perché a ngOnInit il componente viene
+  // inizializzato, non c'è ancora niente
+  ngOnInit(): void {
+    console.log('ngOnInit inputSaluti:', this.inputSaluti);
+  }
+
+  // ngAfterViewInit il console.log ci darà il nostro riferimento all'elemeto
+  // questo è il modo corretto per accedere al ViewChild
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewInit inputSaluti:', this.inputSaluti);
+  }
+
+  onClickView() {
+    console.log(
+      'onClickView inputSaluti:',
+      this.inputSaluti.nativeElement.value
+    );
   }
 }

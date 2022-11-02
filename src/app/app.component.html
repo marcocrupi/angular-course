@@ -4,7 +4,10 @@ a prova.component dobbiamo usare il property binding -->
 componente child dobbiamo usare l'event binding,
 useremo però un evento custom, il quale mette in ascolto il
 componente app.component per l'evento "mandaDatiFuori" -->
-<app-prova [data]="persone" (mandaDatiEvento)="onRiceviDati($event)"></app-prova>
+<app-prova
+  [data]="persone"
+  (mandaDatiEvento)="onRiceviDati($event)"
+></app-prova>
 
 <button (click)="onClickChangePersone()">Cambio Persone</button>
 
@@ -138,3 +141,7 @@ facciamo riferimento alla variabile numero -->
     <p>{{ persona.nome }} {{ persona.cognome }}</p>
   </li>
 </ul>
+
+<!-- #inputSaluti è una variabile di template -->
+<input #inputSaluti value="ciao" />
+<button (click)="onClickView()">Invia</button>
