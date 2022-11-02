@@ -1237,9 +1237,11 @@ Creiamo un bottone e il relativo evento:
 app.component.html
 
 ```html
-<input #inputSaluti value="ciao">
+<input #inputSaluti value="ciao" />
 <button (click)="onClickView()">Invia</button>
 ```
+
+app.component.ts
 
 ```ts
   onClickView() {
@@ -1247,7 +1249,7 @@ app.component.html
   };
 ```
 
-Anche in questo caso il console.log stamperà ElementRef, il quale è un riferimento dell'elemento, che porta con se un nativeElement, aprendolo vedremo una serie di dati, quello che interessa a noi è value.   
+Anche in questo caso il console.log stamperà ElementRef, il quale è un riferimento dell'elemento, che porta con se un nativeElement, aprendolo vedremo una serie di dati, quello che interessa a noi è value.
 
 Per prendere sto valore dobbiamo quindi fare:
 
