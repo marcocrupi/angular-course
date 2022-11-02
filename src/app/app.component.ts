@@ -76,4 +76,8 @@ export class AppComponent {
   numero = 3;
   stringa = 'Topolino';
   color = 'green';
+
+  onRiceviDati(value: string) {
+    console.log(value);
+  }
 }

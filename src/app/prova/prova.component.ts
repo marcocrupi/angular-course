@@ -5,10 +5,12 @@ import {
   AfterViewInit,
   Component,
   DoCheck,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 
@@ -56,6 +58,19 @@ export class ProvaComponent implements OnInit, OnChanges {
   // Input, perché il suo valore arriva dall'esterno.
   @Input() data: any;
 
+  // Proviamo a "buttare fuori" questa variabile al fine di
+  // poterla utilizzare dentro app.component che è il componente
+  // Parent
+  nome = 'Luca';
+
+  // Con "Output" facciamo uscire un evento chiamato "mandaDatiEvento"
+  // che è un "EventEmitter"
+  @Output() mandaDatiEvento = new EventEmitter<string>();
+
+  mandaDati() {
+    this.mandaDatiEvento.emit(this.nome);
+  }
+
   // ng è Angular, On è un event, Init sta per Initialization
   ngOnInit(): void {
     console.log('ngOnInit');
@@ -81,7 +96,7 @@ export class ProvaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // In questo modo riportiamo su console i vari cambiamenti
     // del componente.
-    console.log(changes)
+    console.log(changes);
   }
 
   // Tramite la correzione rapida abbiamo implementato tutte le interfacce

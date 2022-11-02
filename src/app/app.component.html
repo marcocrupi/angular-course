@@ -1,6 +1,10 @@
 <!-- Per passare la variabile persone in app.component.ts
 a prova.component dobbiamo usare il property binding -->
-<app-prova [data]="persone"></app-prova>
+<!-- Per permettere ad app.component di prendere dati dal
+componente child dobbiamo usare l'event binding,
+useremo però un evento custom, il quale mette in ascolto il
+componente app.component per l'evento "mandaDatiFuori" -->
+<app-prova [data]="persone" (mandaDatiEvento)="onRiceviDati($event)"></app-prova>
 
 <button (click)="onClickChangePersone()">Cambio Persone</button>
 

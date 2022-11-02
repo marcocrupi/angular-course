@@ -1025,7 +1025,7 @@ Nell'esempio appena fatto abbiamo la possibilità di usare più condizioni, ment
 </ul>
 ```
 
-## Come passare dei dati da un componente Parent a un Child - LEZIONE 17
+## Passare dati da un componente Parent a un Child - LEZIONE 17
 
 Per componente Child si intende un componente contenuto all'interno di un altro componente.
 
@@ -1142,3 +1142,50 @@ export class ProvaComponent implements OnInit, OnChanges {
 In questo codice ho riportato solo le parti aggiunte relative ad OnChanges.
 
 Pensate a un componente che continua a cambiare, noi grazie a OnChanges abbiamo accesso a molte informazioni, questa fase del ciclo di vita del componente ci permette di far succedere cose ogni volta che il componente cambia, per esempio potremmo far cambiare il layout html al cambiamento di un determinato valore.
+
+## Passare dati da componente Child al Parent - LEZIONE 18
+
+prova.component.ts
+
+```ts
+  // Proviamo a "buttare fuori" questa variabile al fine di
+  // poterla utilizzare dentro app.component che è il componente
+  // Parent
+  nome = "Luca";
+
+  // Con "Output" facciamo uscire un evento chiamato "mandaDatiEvento"
+  // che è un "EventEmitter"
+  @Output() mandaDatiEvento = new EventEmitter<string>();
+
+  mandaDati() {
+    this.mandaDatiEvento.emit(this.nome);
+  }
+```
+
+prova.component.html
+
+```html
+<button (click)="mandaDati()">Manda dati al parente</button>
+```
+
+app.component.html
+
+```html
+<!-- Per permettere ad app.component di prendere dati dal
+componente child dobbiamo usare l'event binding,
+useremo però un evento custom, il quale mette in ascolto il
+componente app.component per l'evento "mandaDatiFuori" -->
+<app-prova [data]="persone" (mandaDatiEvento)="onRiceviDati($event)"></app-prova>
+```
+
+app.component.ts
+
+```ts
+  onRiceviDati(value: string) {
+    console.log(value);
+  }
+```
+
+Ricapitolando per passare i dati da Parent a Child si usa il property binding, mentre da Child a Parent si usa l'event binding. 
+
+Oltre questo sistema esiste un modo più approprieto per farlo su larga scala quando i componenti sono molti e complessi, lo vedremo nelle prossime lezioni.
