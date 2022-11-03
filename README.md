@@ -6,15 +6,15 @@ Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJB
 
 **Installare Angular CLI:**
 
-npm install -g @angular/cli
+**npm install -g @angular/cli**
 
 **Creare un nuovo progetto Angular:**
 
-ng new my-first-project
+**ng new my-first-project**
 
-cd my-first-project
+**cd my-first-project**
 
-ng serve
+**ng serve**
 
 ## Spiegazione File - LEZIONE 2
 
@@ -42,40 +42,40 @@ ng serve
 
 ### FILE NELLA CARTELLA SRC
 
-Nella cartella app abbiamo i file:
+Nella cartella **app** abbiamo i file:
 
-- app.module.ts è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
-- Abbiamo inoltre i 3 file dei componenti (.ts - .html - .css).
-- app-routing.module.ts un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
+- **app.module.ts** è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
+- Abbiamo inoltre i 3 file dei componenti **(.ts - .html - .css)**.
+- **app-routing.module.ts** un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
 
-Nella cartella assets si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc...
+Nella cartella **assets** si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc...
 
-Nella cartella enviroments abbiamo i file:
+Nella cartella **enviroments** abbiamo i file:
 
-- environment.prod.ts è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test.
-- environment.ts è l'ambiente di sviluppo
+- **environment.prod.ts** è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test.
+- **environment.ts** è l'ambiente di sviluppo
 
-La favicon.ico non ha bisogno di presentazioni.
+La **favicon.ico** non ha bisogno di presentazioni.
 
-index.html da cui parte tutto.
+**index.html** da cui parte tutto.
 
-main.ts è il file da cui parte tutta l'applicazione Angular. Noi mandiamo a schermo index.html ma è da qui che parte tutto. Da notare tra le linee di codice l'enviroment e l'AppModule.
+**main.ts** è il file da cui parte tutta l'applicazione Angular. Noi mandiamo a schermo index.html ma è da qui che parte tutto. Da notare tra le linee di codice l'enviroment e l'AppModule.
 
-polyfills.ts è per il supporto dei vari browser.
+**polyfills.ts** è per il supporto dei vari browser.
 
-styles.scss (o css) è lo stile globale dell'app.
+**styles.scss (o css)** è lo stile globale dell'app.
 
-test.ts serve per il test (non lo useremo in questo corso).
+**test.ts** serve per il test (non lo useremo in questo corso).
 
 ### LANCIARE L'APP IN LOCALE
 
 Per lanciare l'applicazione in locale scrivere nel terminale:
 
-ng serve
+**ng serve**
 
 Possiamo usare anche il comando:
 
-npm start
+**npm start**
 
 Tutto quello che appare nella home si trova in app.component.html
 
