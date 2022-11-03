@@ -4,11 +4,11 @@ Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJB
 
 ## Installazione Angular e creazione progetto - LEZIONE 1
 
-**Installare Angular CLI:**
+Installare Angular CLI:
 
 **npm install -g @angular/cli**
 
-**Creare un nuovo progetto Angular:**
+Creare un nuovo progetto Angular:
 
 **ng new my-first-project**
 
