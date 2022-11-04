@@ -145,3 +145,35 @@ facciamo riferimento alla variabile numero -->
 <!-- #inputSaluti è una variabile di template -->
 <input #inputSaluti value="ciao" />
 <button (click)="onClickView()">Invia</button>
+
+<h2>Scegli il colore dell'evidenziatore</h2>
+<div>
+  <!-- Se abbiamo 3 bottoni ma facciamo riferimento a un solo
+  valore il nome deve essere unico -->
+  <input
+    type="radio"
+    name="coloreEvidenziatore"
+    (click)="cambiaColoreEvidenziatore('red')"
+  />Rosso
+  <input
+    type="radio"
+    name="coloreEvidenziatore"
+    (click)="cambiaColoreEvidenziatore('pink')"
+  />Rosa
+  <input
+    type="radio"
+    name="coloreEvidenziatore"
+    (click)="cambiaColoreEvidenziatore('purple')"
+  />Viola
+</div>
+
+<!-- Inseriamo il selettore della
+direttiva di highlight.directive.ts -->
+<!-- Facciamo il property binding e gli assegniamo una variabile -->
+<!-- La variabile colore è quella che creiamo in questa fase in
+app.component -->
+<!-- A questo punto il selettore ci darà errore, questo perché
+al decoratore @Input avevamo assegnato coloreHighlight come
+proprietà, invece andava usato lo stesso nome del selettore, ovvero
+appHighlight, perché il selettore è esso stesso anche una proprietà -->
+<p [appHighlight]="colore" defaultColor="blue">Paragrafo creazione direttiva</p>

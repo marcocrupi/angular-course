@@ -1258,3 +1258,200 @@ Per prendere sto valore dobbiamo quindi fare:
     console.log('onClickView inputSaluti:', this.inputSaluti.nativeElement.value);
   };
 ```
+
+## Creare delle direttive - LEZIONE 20
+
+Creiamo una nuova direttiva col comando:
+
+**ng g d highlight**
+
+La direttiva creata servirà per evidenziare un elemento quando ci passeremo sopra col mouse. È qualcosa che posso anche fare col CSS ma essendo in Angular questa direttiva mi permette di cambiare dinamicamente i colori, cosa che solo col CSS non posso fare. Possiamo anche far comparire altri componenti e così via.
+
+Vengono generati due file, li raccogliamo in una cartella app -> direttive -> highlight (quando spostiamo i file assicuriamoci di aggiornare app.module).
+
+Da notare che in app.module le direttive sono sullo stesso piano dei componenti.
+
+La direttiva sembra un normale componente, gli manca solo il template e lo style. Cambia il tipo di selettore, presenta delle parentesi quadrate. Cambia il decoratore, che specifica che è una direttiva.
+
+highlight.directive.ts
+
+```ts
+import { Directive, ElementRef } from "@angular/core";
+
+@Directive({
+  selector: "[appHighlight]",
+})
+export class HighlightDirective {
+  // Vogliamo associare la direttiva a un elemento,
+  // dobbiamo prendere il riferimento dell'elemento
+  constructor(private element: ElementRef) {
+    // Vogliamo cambiare il colore di background dell'elemento
+    this.element.nativeElement.style.backgroundColor = "yellow";
+  }
+}
+```
+
+app.component.html
+
+```html
+<!-- Inseriamo il selettore della
+direttiva di highlight.directive.ts -->
+<p appHighlight>Paragrafo creazione direttiva</p>
+```
+
+Avendo applicato la direttiva, automanticamente viene applicato lo stile sull'elemento. La nostra direttiva essendo applicata sull'elemento ha accesso ad esso.
+
+Ancora però rimane da gestire il passaggio del mouse, possiamo farlo con una cosa che si chiama **host listener**, per fare ciò dobbiamo creare dei metodi:
+
+highlight.directive.ts
+
+```ts
+  // Passiamo il cambio di stile al decoratore HostListener
+  // In questo modo gestiamo degli eventi "mouseenter" e "mouseleave"
+  @HostListener("mouseenter") onMouseEnter() {
+    this.element.nativeElement.style.backgroundColor = 'yellow';
+  }
+
+  @HostListener("mouseleave") onMouseLeace() {
+    this.element.nativeElement.style.backgroundColor = 'transparent';
+  }
+```
+
+In questo modo otterremo l'effetto desiderato, ma possiamo ottimizzarlo in vista dei prossimi step:
+
+highlight.directive.ts
+
+```ts
+  @HostListener("mouseenter") onMouseEnter() {
+    this.cambiaColore('red');
+  }
+
+  @HostListener("mouseleave") onMouseLeave() {
+    this.cambiaColore("blue");
+  }
+
+  cambiaColore(colore: string) {
+    this.element.nativeElement.style.backgroundColor = colore;
+  }
+```
+
+Abbiamo creato la nostra prima e semplice direttiva.
+
+Adesso vediamo come passare dati alla direttiva per poterla customizzare.
+
+Per passare dei dati da fuori a dentro abbiamo bisogno di @Input.
+
+highlight.directive.ts
+
+```ts
+@Input() coloreHighlight = "";
+```
+
+Noi vogliamo poter passare il valore dal componente parente, ovvero app.component. Per fare ciò ci basta il property binding e gli assegniamo una variabile:
+
+app.component.html
+
+```html
+<!-- Inseriamo il selettore della
+direttiva di highlight.directive.ts -->
+<!-- Facciamo il property binding e gli assegniamo una variabile -->
+<!-- La variabile colore è quella che creiamo in questa fase in
+app.component -->
+<!-- A questo punto il selettore ci darà errore, questo perché
+al decoratore @Input avevamo assegnato coloreHighlight come
+proprietà, invece andava usato lo stesso nome del selettore, ovvero
+appHighlight, perché il selettore è esso stesso anche una proprietà -->
+<p [appHighlight]="colore">Paragrafo creazione direttiva</p>
+```
+
+highlight.directive.ts
+
+```ts
+@Input() appHighlight = "";
+```
+
+app.component.ts
+
+```ts
+colore = "purple";
+```
+
+Andiamo a settare i listener di eventi dicendo che il colore sia quello dato da @Input:
+
+highlight.directive.ts
+
+```ts
+  @HostListener('mouseenter') onMouseEnter() {
+    // this.cambiaColore('red');
+    this.cambiaColore(this.appHighlight);
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    // this.cambiaColore('blue');
+    this.cambiaColore('transparent');
+  }
+```
+
+Adesso il background cambierà in purple, ma questo purple verrà da app.component, quindi adesso possiamo cambiare il colore dal componente parente, vediamo come possiamo cambiare il colore selezionandolo tra varie scelte:
+
+app.component.html
+
+```html
+<h2>Scegli il colore dell'evidenziatore</h2>
+<div>
+  <!-- Se abbiamo 3 bottoni ma facciamo riferimento a un solo
+  valore il nome deve essere unico -->
+  <input
+    type="radio"
+    name="coloreEvidenziatore"
+    (click)="cambiaColoreEvidenziatore('red')"
+  />Rosso
+  <input
+    type="radio"
+    name="coloreEvidenziatore"
+    (click)="cambiaColoreEvidenziatore('pink')"
+  />Rosa
+  <input
+    type="radio"
+    name="coloreEvidenziatore"
+    (click)="cambiaColoreEvidenziatore('purple')"
+  />Viola
+</div>
+```
+
+app.component.ts
+
+```ts
+  cambiaColoreEvidenziatore(colore: string) {
+    this.colore = colore;
+  }
+```
+
+Adesso proviamo ad aggiungere un valore di default. Potremmo non voler impostare un valore di default da app.component.ts ma direttamente dall'elemento html.
+
+Come possiamo farlo? Sappiamo che è un altro @Input, quindi:
+
+highlight.directive.ts
+
+```ts
+@Input() defaultColor = '';
+
+@HostListener('mouseenter') onMouseEnter() {
+    // Questo operatore || ci dice che se c'è un valore associato allora
+    // lo usa, oppure usa this.defaultColor oppure se
+    // non c'è manco questo usa "orange"
+    this.cambiaColore(this.appHighlight || this.defaultColor || "orange") ;
+  }
+```
+
+app.component.ts
+
+```ts
+colore = '';
+```
+
+app.component.html
+
+```html
+<p [appHighlight]="colore" defaultColor="blue">Paragrafo creazione direttiva</p>
+```

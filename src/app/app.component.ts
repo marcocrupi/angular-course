@@ -111,4 +111,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.inputSaluti.nativeElement.value
     );
   }
+
+  colore = '';
+
+  cambiaColoreEvidenziatore(colore: string) {
+    this.colore = colore;
+  }
 }
