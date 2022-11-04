@@ -13,6 +13,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { ServizioProvaService } from '../servizi/servizio-prova.service';
 
 @Component({
   selector: 'app-prova',
@@ -49,9 +50,8 @@ export class ProvaComponent implements OnInit, OnChanges {
   immagine2 =
     'https://www.carteltec.com/wp-content/uploads/2021/07/1627566486_Berserk-las-noticias-no-son-buenas-sobre-el-futuro-del.jpeg';
 
-  constructor() {
-    console.log('costruttore');
-  }
+  // Inniettiamo il service a prova.component inserendolo nel costruttore
+  constructor(private servizioProva: ServizioProvaService) {}
 
   // Quando si scrive, dovrebbe essere importato automaticamente
   // da Angular. La variabile data quindi ha un decoratore chiamato
@@ -91,7 +91,11 @@ export class ProvaComponent implements OnInit, OnChanges {
     }, 5000);
 
     console.log('Dati passati da app.component:', this.data);
+
+    console.log('Dati dal service', this.servizioProva.personeServiceLesson);
   }
+
+  personaService = this.servizioProva.personeServiceLesson[0].nome;
 
   ngOnChanges(changes: SimpleChanges): void {
     // In questo modo riportiamo su console i vari cambiamenti

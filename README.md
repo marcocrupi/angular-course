@@ -1559,5 +1559,93 @@ quanti numeri e quanti decimali riportare -->
 
 Esiste anche una currency pipe **locale** che prende tutte le impostazioni locali dell'utente e setta la currency in base ad esse.
 
-La documentazione sulle pipe si trova al seguente link: https://angular.io/guide/pipes 
+La documentazione sulle pipe si trova al seguente link: https://angular.io/guide/pipes
 
+## Cosa sono i service - LEZIONE 22
+
+I service possono comunicare con qualsiasi componente in modo trasversale. Inoltre i componenti devono limitarsi a mostrare a schermo roba, quindi i componenti a certi livelli di programmazione, non devono avere logica all'interno, essa deve essere delegata ai service.
+
+In realtà ci deve essere un minimo di interazione e di logica nei componenti, ma i dati vanno presi dal service. Il componente deve limitarsi a gestire la parte visiva.
+
+Utilizziamo un nuovo comando nel terminale:
+
+**ng g s servizio-prova**
+
+Il file che viene a crearsi si presenta così:
+
+servizio-prova.service.ts
+
+```ts
+import { Injectable } from "@angular/core";
+
+@Injectable({
+  providedIn: "root",
+})
+export class ServizioProvaService {
+  constructor() {}
+}
+```
+
+L'unico import presente ci suggerisce che possiamo "iniettare" il nostro service in tutta l'applicazione o solo in alcune parti di essa.
+
+All'interno del decoratore @Injectable vi è la proprietà "proviceIn: 'root'", indica dove viene messo a disposizione il service, in questo caso nella root. Vuol dire che qualsiasi componente può chiamarlo.
+
+Modificando provideIn rendiamo disponibile il service solo in certi componenti.
+
+Se andiamo su app.module.ts notiamo che la parola "providers" è molto simile alla parola "provideIn", infatti noi potremmo avere i service scritti in "providers", però nel nostro caso, indicando root in provideIn è come inserire il service tra i providers in app.module.
+
+C'è da considerare che noi possiamo dividere l'applicazione in altri moduli e decidere in quali di essi indicare il service.
+
+Nel nostro caso metteremo il service a disposizione di tutta l'applicazione.
+
+In genere nelle applicazioni ci sono più service, per esempio c'è un service che gestisce i login, un altro prende i dati delle fatture ecc...
+
+Riprendiamo l'array di oggetti persone che avevamo già visto nelle prime lezioni e chiamiamolo in modo leggermente diverso:
+
+servizio-prova.service.ts
+
+```ts
+export class ServizioProvaService {
+  personeServiceLesson = [
+    { nome: 'Luca', cognome: 'Rossi', isOnline: true, color: 'blue' },
+    { nome: 'Marco', cognome: 'Verdi', isOnline: false, color: 'red' },
+    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false, color: 'yellow' },
+    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true, color: 'green' },
+    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
+  ];
+```
+
+Vediamo come facciamo ad accedere ai dati al suo interno in modo "brutale", proviamo ad accedere da prova.component:
+
+prova.component.ts
+
+```ts
+  // Inniettiamo il service a prova.component inserendolo nel costruttore
+  constructor(private servizioProva: ServizioProvaService) {}
+
+  ngOnInit(): void {
+  console.log('Dati dal service', this.servizioProva.personeServiceLesson);
+  }
+```
+
+Se andiamo sulla console vedremo l'array del service. Possiamo farte la stessa cosa su app.component e avremo gli stessi dati che sono stati messi a disposizione per prova.component.
+
+Tutto lo sbatti di prima che avevamo fatto prima da componente a componente viene completamente saltato con i service.
+
+Quindi se in un'applicazione dobbiamo condividere dati tra più componenti, anziché salvarli in un componente e farli "scendere" possiamo metterli in comune con un service.
+
+Dai service ovviamente possiamo richiamare anche metodi non solo dati.
+
+prova.component.ts
+
+```ts
+  personaService = this.servizioProva.personeServiceLesson[0].nome;
+```
+
+prova.component.html
+
+```html
+  <p>Prova Lezione Service: {{ personaService }}</p>
+```
+
+Con questo codice ho fatto lo string interpolation di una proprietà che prende il valore direttamente dal service.

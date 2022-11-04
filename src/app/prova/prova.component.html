@@ -39,7 +39,7 @@
   </mat-card-actions>
 </mat-card>
 
-<div [ngStyle]="{ 'margin': '50px 0' }">
+<div [ngStyle]="{ margin: '50px 0' }">
   <div *ngFor="let persona of data">
     <p [ngStyle]="{ color: persona.color }">
       {{ persona.nome }} {{ persona.cognome }}
@@ -48,3 +48,5 @@
 </div>
 
 <button (click)="mandaDati()">Manda dati al parente</button>
+
+<p>Prova Lezione Service: {{ personaService }}</p>
