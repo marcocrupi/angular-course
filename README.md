@@ -1455,3 +1455,109 @@ app.component.html
 ```html
 <p [appHighlight]="colore" defaultColor="blue">Paragrafo creazione direttiva</p>
 ```
+
+## Funzioni Pipe - LEZIONE 21
+
+Le pipe sono delle funzioni che possiamo utilizzare all'interno delle espressioni stringa, di base quando andiamo a fare string interpolation.
+
+app.component.html
+
+```html
+<!-- Usiamo la string interpolation, la stanghett è una pipe e vuol dire
+che adesso possiamo inserire delle funzioni pipe, alcune non necessitano
+di parametri che possiamo aggiungere, ad esempio "uppercase" -->
+<p>Ciao benvenuti al {{ title | uppercase }}</p>
+```
+
+Nell'esempio ci siamo risparmiati l'uso del CSS, ma possiamo fare anche roba più complicata che il CSS non ci permetterebbe, come l'introduzione della currency.
+
+Le pipe si utilizzano anche per le traduzioni.
+
+Possiamo anche costruirci le nostre pipe ma in questo corso non ci interessa e comunque le più utili sono già presenti di default.
+
+Oltre ad **uppercase** ed ovviamente a **lowercase** abbiamo altre pipe.
+
+Andiamo a vedere la **datepipe**, che ci permette di formattare la data in diversi modi.
+
+app.component.ts
+
+```ts
+oggi = Date.now();
+```
+
+app.component.html
+
+```html
+<!--Andiamo a prendere la proprietà "oggi" che contiene Date.Now(), riporterà
+un valore che indica quanti secondi sono passati dal 1970, il che è illegibile,
+per formattare questo valore invece di creare una funzione apposita in .ts usiamo
+la pipe -->
+<!-- In questo modo mostra mese, giorno e anno -->
+<p>{{ oggi | date }}</p>
+<!-- In questo modo avremo anche l'orario -->
+<p>{{ oggi | date:"medium" }}</p>
+<!-- In questo modo avremo solo l'ora -->
+<p>{{ oggi | date:"shortTime" }}</p>
+<!-- Possiamo anche formattarlo direttamente con minuti e secondi -->
+<p>{{ oggi | date:"mm:ss" }}</p>
+<!-- Proviamo ad aggiungere anche le ore alla precedente pipe -->
+<p>{{ oggi | date:"h:mm:ss" }}</p>
+<!-- Una versione completa ed utile può essere la seguente,
+impostando MMM appare il mese testuale -->
+<p>{{ oggi | date:"dd/mm/yyyy - h:mm:ss" }}</p>
+```
+
+Questi sono solo alcuni esempi, nella documentazione ci sono anche altri casi indicati.
+
+Andiamo avanti, vediamo **decimalpipe** e **percentagepipe**.
+
+Come potreste immaginare la decimalpipe ci permette di mettere i decimali:
+
+app.component.ts
+
+```ts
+numeroPipeLesson = 5.3435435643;
+```
+
+app.component.html
+
+```html
+<!-- Vediamo la decimalpipe, gli stiamo dicendo di riportare minimo due
+numeri interi e dopo la virgola, di riportare minimo 2 decimali e massimo
+4 decimali -->
+<p>{{ numeroPipeLesson | number: '2.2-4' }}</p>
+```
+
+Per la percentagepipe:
+
+app.component.html
+
+```html
+<!-- Per la percentuale funziona allo stesso modo -->
+<p>{{ numeroPipeLesson | percent: '2.2-4' }}</p>
+```
+
+La **currencypipe** è un argomento interessante:
+
+app.component.html
+
+```html
+<!-- La currencypipe senza aggiungere niente di default ci
+riporterà il numero espresso in dollari -->
+<p>{{ numeroPipeLesson | currency }}</p>
+
+<!-- Se vogliamo gli euro dobbiamo fare un'aggiunta -->
+<p>{{ numeroPipeLesson | currency: "EUR" }}</p>
+
+<!-- Se invece vogliamo la scritta "EUR" bisogna fare così -->
+<p>{{ numeroPipeLesson | currency: "EUR":"code" }}</p>
+
+<!-- Possiamo specificare l'uso del symbol e specificare anche qui
+quanti numeri e quanti decimali riportare -->
+<p>{{ numeroPipeLesson | currency: "EUR":"symbol":"2.1-5" }}</p>
+```
+
+Esiste anche una currency pipe **locale** che prende tutte le impostazioni locali dell'utente e setta la currency in base ad esse.
+
+La documentazione sulle pipe si trova al seguente link: https://angular.io/guide/pipes 
+

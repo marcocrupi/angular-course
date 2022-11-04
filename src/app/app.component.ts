@@ -117,4 +117,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   cambiaColoreEvidenziatore(colore: string) {
     this.colore = colore;
   }
+
+  numeroPipeLesson = 5.3435435643;
+
+  oggi = Date.now();
 }
