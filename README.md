@@ -1195,7 +1195,7 @@ Oltre questo sistema esiste un modo più approprieto per farlo su larga scala qu
 
 ## Le variabili Template - LEZIONE 19
 
-Abbiamo visto le variabili template nella lezione 12,oggi vediamo come possiamo prendere la variabile template, quindi il riferimento all'elemento HTML, in typescript, questo è un metodo che si usa per puntare al form.
+Abbiamo visto le variabili template nella lezione 12, oggi vediamo come possiamo prendere la variabile template, quindi il riferimento all'elemento HTML, in typescript, questo è un metodo che si usa per puntare al form.
 
 Abbiamo già visto come collegare direttamente un input a una variabile in TypeScript, ora vediamo come poter pescare i valori di input sul click, senza dover collegare per forza una variabile.
 
