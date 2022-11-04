@@ -4,78 +4,78 @@ Link al corso: https://youtube.com/playlist?list=PLP5MAKLy8lP-x-Ust2YGwspgt4wMJB
 
 ## Installazione Angular e creazione progetto - LEZIONE 1
 
-**Installare Angular CLI:**
+Installare Angular CLI:
 
-npm install -g @angular/cli
+**npm install -g @angular/cli**
 
-**Creare un nuovo progetto Angular:**
+Creare un nuovo progetto Angular:
 
-ng new my-first-project
+**ng new my-first-project**
 
-cd my-first-project
+**cd my-first-project**
 
-ng serve
+**ng serve**
 
 ## Spiegazione File - LEZIONE 2
 
 ### FILE "ESTERNI"
 
-.browserslistrc è un file utilizzato dal sistema di build, per aggiustare il css e il js in base al supporto dei vari browser. Sono elencati i vari browser che vogliamo supportare.
+**.browserslistrc** è un file utilizzato dal sistema di build, per aggiustare il css e il js in base al supporto dei vari browser. Sono elencati i vari browser che vogliamo supportare.
 
-.editorconfig possiamo specificare delle regole per l'editor, sono legate al modo in cui noi andiamo a scrivere.
+**.editorconfig** possiamo specificare delle regole per l'editor, sono legate al modo in cui noi andiamo a scrivere.
 
-.gitignore serve a dire quali file andiamo a salvare sul nostro repository e quali no. In genere non si mandano i node modules, poiché sono pesanti, basta fare npm install ogni volta che cloniamo il progetto da GitHub.
+**.gitignore** serve a dire quali file andiamo a salvare sul nostro repository e quali no. In genere non si mandano i node modules, poiché sono pesanti, basta fare npm install ogni volta che cloniamo il progetto da GitHub.
 
-angular.json sono dati relativi ad Angular.
+**angular.json** sono dati relativi ad Angular.
 
-karma.conf.js serve per i test.
+**karma.conf.js** serve per i test.
 
-package-lock.json & package.json sono entrambi legati a node ed ai vari pacchetti. Il package-lock è una versione avanzata del package.json.
+**package-lock.json & package.json** sono entrambi legati a node ed ai vari pacchetti. Il package-lock è una versione avanzata del package.json.
 
-README.md serve a farci vedere velocemente come usare Angular.
+**README.md** serve a farci vedere velocemente come usare Angular.
 
-tsconfig.app.json è la configurazione di Typescript e ci indica i file a cui fa riferimento.
+**tsconfig.app.json** è la configurazione di Typescript e ci indica i file a cui fa riferimento.
 
-tsconfig.json è la struttura di dati che servono al compilatore Typescript.
+**tsconfig.json** è la struttura di dati che servono al compilatore Typescript.
 
-tsconfig.spec.json è legata al testing di Typescript.
+**tsconfig.spec.json** è legato al testing di Typescript.
 
 ### FILE NELLA CARTELLA SRC
 
-Nella cartella app abbiamo i file:
+Nella cartella **app** abbiamo i file:
 
-- app.module.ts è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
-- Abbiamo inoltre i 3 file dei componenti (.ts - .html - .css).
-- app-routing.module.ts un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
+- **app.module.ts** è un file di "censimento", in declarations c'è la lista dei componenti che abbiamo, in imports la lista dei moduli che vogliamo utilizzare, ed infine i services. Tutto quello che utilizziamo in Angular deve passare da qua.
+- Abbiamo inoltre i 3 file dei componenti **(.ts - .html - .css)**.
+- **app-routing.module.ts** un altro modulo che non fa altro che gestire il routing, ovvero il cambio delle pagine fittizio.
 
-Nella cartella assets si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc...
+Nella cartella **assets** si inseriscono i file che vogliamo utilizzare, come immagini, icone, pdf ecc...
 
-Nella cartella enviroments abbiamo i file:
+Nella cartella **enviroments** abbiamo i file:
 
-- environment.prod.ts è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test.
-- environment.ts è l'ambiente di sviluppo
+- **environment.prod.ts** è l'ambiente di produzione, qua dentro andremo a mettere delle variabili, sono delle variabili che cambieranno in base all'ambiente, quando saremo in fase di deploy Angular è in grado di capire se siamo in produzione o in test.
+- **environment.ts** è l'ambiente di sviluppo
 
-La favicon.ico non ha bisogno di presentazioni.
+La **favicon.ico** non ha bisogno di presentazioni.
 
-index.html da cui parte tutto.
+**index.html** da cui parte tutto.
 
-main.ts è il file da cui parte tutta l'applicazione Angular. Noi mandiamo a schermo index.html ma è da qui che parte tutto. Da notare tra le linee di codice l'enviroment e l'AppModule.
+**main.ts** è il file da cui parte tutta l'applicazione Angular. Noi mandiamo a schermo index.html ma è da qui che parte tutto. Da notare tra le linee di codice l'enviroment e l'AppModule.
 
-polyfills.ts è per il supporto dei vari browser.
+**polyfills.ts** è per il supporto dei vari browser.
 
-styles.scss (o css) è lo stile globale dell'app.
+**styles.scss (o css)** è lo stile globale dell'app.
 
-test.ts serve per il test (non lo useremo in questo corso).
+**test.ts** serve per il test (non lo useremo in questo corso).
 
 ### LANCIARE L'APP IN LOCALE
 
 Per lanciare l'applicazione in locale scrivere nel terminale:
 
-ng serve
+**ng serve**
 
 Possiamo usare anche il comando:
 
-npm start
+**npm start**
 
 Tutto quello che appare nella home si trova in app.component.html
 
@@ -111,15 +111,15 @@ export class AppComponent {
 
 Per creare un nuovo componente dobbiamo scrivere nel terminale:
 
-ng g c prova
+**ng g c prova**
 
 Dove "g" sta per generate e "c" sta per component.
 
 Verrà generata una cartella con i file tipici dei componenti Angular che abbiamo visto prima.
 
-Un'altra cosa che è successa è l'update di app.module.ts, potevamo farlo a mano ma con una semplice riga di terminale abbiamo avuto tutto automatizzato.
+Un'altra cosa che è successa è l'update di **app.module.ts**, potevamo farlo a mano ma con una semplice riga di terminale abbiamo avuto tutto automatizzato.
 
-Questo è il file .ts che ha generato:
+Questo è il file .ts del componente che ha generato:
 
 ```ts
 import { Component, OnInit } from "@angular/core";
@@ -158,7 +158,7 @@ Apriamo la documentazione di Angular Material: https://material.angular.io/guide
 
 Installiamo con il comando:
 
-ng add @angular/material
+**ng add @angular/material**
 
 Proviamo a mostrare un componente, c'è la relativa sezione "Display a component" nella documentazione.
 
@@ -291,19 +291,19 @@ Nel caso dell'esempio precedente vogliamo ad esempio che la card sia esteticamen
 
 Viene in nostro aiuto il databinding, che vuole dire legare i dati.
 
-La parte logica prende il nome di model, ed è quella nel file Typescript del componente, mentre la view è la parte grafica e si trova nel file html. Quindi il databinding consiste nel collegare i dati presenti nella parte logica a ciò che l'utente vede a schermo, ma anche viceversa, perché possiamo collegare i componenti che leghiamo a schermo con ciò che succede dietro.
+La parte logica prende il nome di **model**, ed è quella nel file Typescript del componente, mentre la **view** è la parte grafica e si trova nel file html. Quindi il databinding consiste nel collegare i dati presenti nella parte logica a ciò che l'utente vede a schermo, ma anche viceversa, perché possiamo collegare i componenti che leghiamo a schermo con ciò che succede dietro.
 
 Il databinding si scompone in due categorie:
 
-- one-way (una direzione): portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
-- two-way (doppia direzione): i dati vengono passati da ambo le parti in contemporanea.
+* **one-way** (una direzione): portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
+* **two-way** (doppia direzione): i dati vengono passati da ambo le parti in contemporanea.
 
 Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni):
 
-- String interpolation (interpolazione delle stringhe): serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
-- Property binding: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
-- Event binding: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
-- Two-way binding: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
+* **String interpolation (interpolazione delle stringhe)**: serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
+* **Property binding**: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
+* **Event binding**: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
+* **Two-way binding**: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
 
 I primi tre sono one-way mentre l'ultimo come suggerisce il nome è two-way. Quindi esistono 4 modi di fare databinding.
 
