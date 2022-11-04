@@ -167,21 +167,21 @@ Schema di un ciclo di vita di un componente:
 
 ![alt text](/src/assets/img/component_lifecycle.png)
 
-ngOnInit() l'avevamo già incontrato, ed era stato creato automaticamente da Angular non appena abbiamo creato il componente prova.
+**ngOnInit()** l'avevamo già incontrato, ed era stato creato automaticamente da Angular non appena abbiamo creato il componente prova.
 
-Non appena viene inizializzato il componente fa un controllo ngDoCheck().
+Non appena viene inizializzato il componente fa un controllo **ngDoCheck()**.
 
-Poniamo il caso non ci sia niente in questo controllo si passa a ngAfterContentInit(), il content non è altro che il testo, tutto ciò che è all'interno dei tag html.
+Poniamo il caso non ci sia niente in questo controllo si passa a **ngAfterContentInit()**, il content non è altro che il testo, tutto ciò che è all'interno dei tag html.
 
-Dopo che viene inizializzato il conenuto viene controllato, ngAfterContentChecked().
+Dopo che viene inizializzato il conenuto viene controllato, **ngAfterContentChecked()**.
 
-Dopodiché viene inizializzata la view con ngAfterInit(), la view è la parte visibile del componente, ovvero il risultato finale.
+Dopodiché viene inizializzata la view con **ngAfterInit()**, la view è la parte visibile del componente, ovvero il risultato finale.
 
-La view viene anch'essa controllata, ngAfterViewChecked(), ed il componente rimane visibile sullo schermo fino a che noi non lo distruggiamo ngOnDestroy.
+La view viene anch'essa controllata, **ngAfterViewChecked()**, ed il componente rimane visibile sullo schermo fino a che noi non lo distruggiamo **ngOnDestroy()**.
 
 I metodi in rosso vengono chiamati una volta sola, ovvero quando il componente viene creato, quelli in verde vengono chiamati ogni volta che succede qualcosa.
 
-ngOnChanges() vuol dire che il nostro componente è sempre in ascolto e che possiamo interagirci. Il componente può mutare e quindi va effettuato un controllo su di esso, ngDoCheck(), va fatto un check sul contenuto per vedere se è cambiato qualcosa, ngAfterContentChecked() ed infine il check sulla view, ngAfterViewChecked().
+**ngOnChanges()** vuol dire che il nostro componente è sempre in ascolto e che possiamo interagirci. Il componente può mutare e quindi va effettuato un controllo su di esso, **ngDoCheck()**, va fatto un check sul contenuto per vedere se è cambiato qualcosa, **ngAfterContentChecked()** ed infine il check sulla view, **ngAfterViewChecked()**.
 
 Questo ciclo di vita ci permette di andare a fare cose mirate quando succedono determinati eventi.
 
@@ -274,21 +274,21 @@ Se io copio e incollo il componente realizzato precedentemente mi troverò degli
 
 Nel caso dell'esempio precedente vogliamo ad esempio che la card sia esteticamente uguale ma mostri diversi tipi di cane per ogni elemento. Quindi vogliamo modificare i dati all'interno.
 
-Viene in nostro aiuto il databinding, che vuole dire legare i dati.
+Viene in nostro aiuto il **databinding**, che vuole dire legare i dati.
 
-La parte logica prende il nome di model, ed è quella nel file Typescript del componente, mentre la view è la parte grafica e si trova nel file html. Quindi il databinding consiste nel collegare i dati presenti nella parte logica a ciò che l'utente vede a schermo, ma anche viceversa, perché possiamo collegare i componenti che leghiamo a schermo con ciò che succede dietro.
+La parte logica prende il nome di **model**, ed è quella nel file Typescript del componente, mentre la **view** è la parte grafica e si trova nel file html. Quindi il databinding consiste nel collegare i dati presenti nella parte logica a ciò che l'utente vede a schermo, ma anche viceversa, perché possiamo collegare i componenti che leghiamo a schermo con ciò che succede dietro.
 
 Il databinding si scompone in due categorie:
 
-- one-way (una direzione): portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
-- two-way (doppia direzione): i dati vengono passati da ambo le parti in contemporanea.
+* **one-way (una direzione)**: portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
+* **two-way (doppia direzione)**: i dati vengono passati da ambo le parti in contemporanea.
 
 Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni):
 
-- String interpolation (interpolazione delle stringhe): serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
-- Property binding: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
-- Event binding: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
-- Two-way binding: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
+* **String interpolation (interpolazione delle stringhe)**: serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
+* **Property binding**: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
+* **Event binding**: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
+* **Two-way binding**: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
 
 I primi tre sono one-way mentre l'ultimo come suggerisce il nome è two-way. Quindi esistono 4 modi di fare databinding.
 
@@ -332,7 +332,7 @@ Il property binding consiste nel collegare dei dati che abbiamo in Typescript al
 
 Con questa forma di databinding non vogliamo mandare a schermo direttamente un dato ma vogliamo ad esempio cambiare un'immagine, la funzionalità di un bottone, la classe che gli assegniamo ecc...
 
-Facciamo un esempio inserendo un bottone nell'html del componente (prendiamolo ma Angular Material).
+Facciamo un esempio inserendo un bottone nell'html del componente (prendiamolo da Angular Material).
 
 Inseriamo l'attributo disabled nel bottone, possiamo assegnarli o true (pulsante disabilitato, non si può premere) o false (pulsante abilitato, si può premere).
 
@@ -550,9 +550,9 @@ questo (input)="onInput($event)" con [(ngModel)]="inputValue" colleghiamo quindi
 <input matInput placeholder="Ex. Pizza" [(ngModel)]="inputValue" value="" />
 ```
 
-Una volta digitato ciò ci darà errore, questo perché dobbiamo importare in app.module.ts il modulo di Angular FormsModule.
+Una volta digitato ciò ci darà errore, questo perché dobbiamo importare in app.module.ts il modulo di Angular **FormsModule**.
 
-ngModel è una direttiva, argomento che affronteremo nelle prossime lezioni. Questa direttiva dice di connettere ngModel sia in entrata come evento sull'input (cioè quando utilizzo il mio input è un evento), ma quando arriva qualcosa da TypeScript è property binding.
+**ngModel** è una direttiva, argomento che affronteremo nelle prossime lezioni. Questa direttiva dice di connettere ngModel sia in entrata come evento sull'input (cioè quando utilizzo il mio input è un evento), ma quando arriva qualcosa da TypeScript è property binding.
 
 Quindi grazie alle parentesi tonde che rappesentano l'event binding quando vado a digitare nell'input vado a modificare la proprietà inputValue, ma allo stesso modo, avendo le parentesi quadre, sto facendo property binding, e quindi gli dico, quando inputValue cambia in TypeScript cambia quello che è il value del mio input.
 
@@ -574,7 +574,7 @@ Così facendo ogni volta che cliccherò sul bottone andrà a modificare il valor
 
 Questa sarà una lezione più teorica, nelle prossime lezioni le vedremo nello specifico.
 
-Le direttive sono classi, servono per essere messe sugli elementi html, per andare a cambiare il comportamento di essi.
+Le **direttive sono classi**, servono per essere messe sugli elementi html, per andare a cambiare il comportamento di essi.
 
 Per esempio, nella lezione precedente abbiamo usato ngModel, che non è un attributo html, ma è un qualcosa che è stato aggiunto da Angular. Le direttive cambiano il comportamento dell'elemento.
 
@@ -598,7 +598,7 @@ Facciamo un esempio:
 
 Quindi se 4 e minore di 5 verrà mostrato l'elemento in cui si trova questa direttiva. Se però ad esempio mettiamo 6 < 5, condizione che risulterà falsa, allora l'elemento verrà nascosto.
 
-ATTENZIONE ngIf non fa un display none ma va a creare o meno l'elemento in base alla condizione.
+**ATTENZIONE** ngIf non fa un display none ma va a creare o meno l'elemento in base alla condizione.
 
 Proviamo adesso con una variabile:
 
@@ -757,11 +757,11 @@ Potremmo usare l'indice in un condizionale, dove ad esempio il cerchio arancione
 
 Tra le altre variabili che potremmo prendere troviamo:
 
-- **count**, che prende tutta la lunghezza dell'array.
-- **first**, restituisce true sul primo elemento dell'array e false negli altri.
-- **last**, restituisce true nell'ultimo elemento dell'array e false negli altri.
-- **even**, restituisce true sugli elementi pari e false sui dispari.
-- **odd**, restituisce true sugli elementi dispari e false sui pari.
+* **count**, che prende tutta la lunghezza dell'array.
+* **first**, restituisce true sul primo elemento dell'array e false negli altri.
+* **last**, restituisce true nell'ultimo elemento dell'array e false negli altri.
+* **even**, restituisce true sugli elementi pari e false sui dispari.
+* **odd**, restituisce true sugli elementi dispari e false sui pari.
 
 Le variabili sono presenti sulla documentazione: https://angular.io/api/common/NgFor
 
@@ -1016,7 +1016,7 @@ Per componente Child si intende un componente contenuto all'interno di un altro 
 
 Nel nostro esempio, in app.component.html abbiamo il componente app-prova, noi vogliamo passargli i dati di app.component.ts.
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 persone = [
@@ -1028,7 +1028,7 @@ persone = [
 ];
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Per passare la variabile persone in app.component.ts
@@ -1036,7 +1036,7 @@ a prova.component dobbiamo usare il property binding -->
 <app-prova [data]="persone"></app-prova>
 ```
 
-prova.component.ts
+**prova.component.ts**
 
 ```ts
 // Quando si scrive, dovrebbe essere importato automaticamente
@@ -1049,7 +1049,7 @@ ngOnInit(): void {
   }
 ```
 
-prova.component.html
+**prova.component.html**
 
 ```html
 <div [ngStyle]="{ 'margin': '50px 0' }">
@@ -1063,7 +1063,7 @@ prova.component.html
 
 Essendoci il property binding su data, vuol dire che quando cambiano i dati delle persone cambiano anche in data. Facciamo un esperimento:
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 onClickChangePersone() {
@@ -1102,7 +1102,7 @@ onClickChangePersone() {
   }
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <button (click)="onClickChangePersone()">Cambio Persone</button>
@@ -1112,7 +1112,7 @@ Cliccando sul bottone vengono cambiati i valori delle proprietà in persone e qu
 
 Come facciamo a "prendere" i vari cambiamenti? Con onChanges:
 
-prova.component.ts
+**prova.component.ts**
 
 ```ts
 export class ProvaComponent implements OnInit, OnChanges {
@@ -1130,7 +1130,7 @@ Pensate a un componente che continua a cambiare, noi grazie a OnChanges abbiamo 
 
 ## Passare dati da un componente Child al Parent - LEZIONE 18
 
-prova.component.ts
+**prova.component.ts**
 
 ```ts
   // Proviamo a "buttare fuori" questa variabile al fine di
@@ -1147,13 +1147,13 @@ prova.component.ts
   }
 ```
 
-prova.component.html
+**prova.component.html**
 
 ```html
 <button (click)="mandaDati()">Manda dati al parente</button>
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Per permettere ad app.component di prendere dati dal
@@ -1166,7 +1166,7 @@ componente app.component per l'evento "mandaDatiFuori" -->
 ></app-prova>
 ```
 
-app.component.ts
+**app.component.ts**
 
 ```ts
   onRiceviDati(value: string) {
@@ -1184,7 +1184,7 @@ Abbiamo visto le variabili template nella lezione 12, oggi vediamo come possiamo
 
 Abbiamo già visto come collegare direttamente un input a una variabile in TypeScript, ora vediamo come poter pescare i valori di input sul click, senza dover collegare per forza una variabile.
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- #inputSaluti è una variabile di template -->
@@ -1193,7 +1193,7 @@ app.component.html
 
 Per prendere la variabile di template nel file html dobbiamo utilizzare un decoratore:
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 // È un decoratore che ci dice che c'è un figlio della view,
@@ -1219,14 +1219,14 @@ Con questo sistema, parlando di un ipotetico form, usando ViewChild, invece di c
 
 Creiamo un bottone e il relativo evento:
 
-app.component.html
+**app.component.html**
 
 ```html
 <input #inputSaluti value="ciao" />
 <button (click)="onClickView()">Invia</button>
 ```
 
-app.component.ts
+**app.component.ts**
 
 ```ts
   onClickView() {
@@ -1258,7 +1258,7 @@ Da notare che in app.module le direttive sono sullo stesso piano dei componenti.
 
 La direttiva sembra un normale componente, gli manca solo il template e lo style. Cambia il tipo di selettore, presenta delle parentesi quadrate. Cambia il decoratore, che specifica che è una direttiva.
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
 import { Directive, ElementRef } from "@angular/core";
@@ -1276,7 +1276,7 @@ export class HighlightDirective {
 }
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Inseriamo il selettore della
@@ -1288,7 +1288,7 @@ Avendo applicato la direttiva, automanticamente viene applicato lo stile sull'el
 
 Ancora però rimane da gestire il passaggio del mouse, possiamo farlo con una cosa che si chiama **host listener**, per fare ciò dobbiamo creare dei metodi:
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
   // Passiamo il cambio di stile al decoratore HostListener
@@ -1304,7 +1304,7 @@ highlight.directive.ts
 
 In questo modo otterremo l'effetto desiderato, ma possiamo ottimizzarlo in vista dei prossimi step:
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
   @HostListener("mouseenter") onMouseEnter() {
@@ -1326,7 +1326,7 @@ Adesso vediamo come passare dati alla direttiva per poterla customizzare.
 
 Per passare dei dati da fuori a dentro abbiamo bisogno di @Input.
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
 @Input() coloreHighlight = "";
@@ -1334,7 +1334,7 @@ highlight.directive.ts
 
 Noi vogliamo poter passare il valore dal componente parente, ovvero app.component. Per fare ciò ci basta il property binding e gli assegniamo una variabile:
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Inseriamo il selettore della
@@ -1349,13 +1349,13 @@ appHighlight, perché il selettore è esso stesso anche una proprietà -->
 <p [appHighlight]="colore">Paragrafo creazione direttiva</p>
 ```
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
 @Input() appHighlight = "";
 ```
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 colore = "purple";
@@ -1363,7 +1363,7 @@ colore = "purple";
 
 Andiamo a settare i listener di eventi dicendo che il colore sia quello dato da @Input:
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
   @HostListener('mouseenter') onMouseEnter() {
@@ -1379,7 +1379,7 @@ highlight.directive.ts
 
 Adesso il background cambierà in purple, ma questo purple verrà da app.component, quindi adesso possiamo cambiare il colore dal componente parente, vediamo come possiamo cambiare il colore selezionandolo tra varie scelte:
 
-app.component.html
+**app.component.html**
 
 ```html
 <h2>Scegli il colore dell'evidenziatore</h2>
@@ -1404,7 +1404,7 @@ app.component.html
 </div>
 ```
 
-app.component.ts
+**app.component.ts**
 
 ```ts
   cambiaColoreEvidenziatore(colore: string) {
@@ -1416,7 +1416,7 @@ Adesso proviamo ad aggiungere un valore di default. Potremmo non voler impostare
 
 Come possiamo farlo? Sappiamo che è un altro @Input, quindi:
 
-highlight.directive.ts
+**highlight.directive.ts**
 
 ```ts
 @Input() defaultColor = '';
@@ -1429,13 +1429,13 @@ highlight.directive.ts
   }
 ```
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 colore = "";
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <p [appHighlight]="colore" defaultColor="blue">Paragrafo creazione direttiva</p>
@@ -1445,7 +1445,7 @@ app.component.html
 
 Le pipe sono delle funzioni che possiamo utilizzare all'interno delle espressioni stringa, di base quando andiamo a fare string interpolation.
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Usiamo la string interpolation, la stanghett è una pipe e vuol dire
@@ -1464,13 +1464,13 @@ Oltre ad **uppercase** ed ovviamente a **lowercase** abbiamo altre pipe.
 
 Andiamo a vedere la **datepipe**, che ci permette di formattare la data in diversi modi.
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 oggi = Date.now();
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <!--Andiamo a prendere la proprietà "oggi" che contiene Date.Now(), riporterà
@@ -1498,13 +1498,13 @@ Andiamo avanti, vediamo **decimalpipe** e **percentagepipe**.
 
 Come potreste immaginare la decimalpipe ci permette di mettere i decimali:
 
-app.component.ts
+**app.component.ts**
 
 ```ts
 numeroPipeLesson = 5.3435435643;
 ```
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Vediamo la decimalpipe, gli stiamo dicendo di riportare minimo due
@@ -1515,7 +1515,7 @@ numeri interi e dopo la virgola, di riportare minimo 2 decimali e massimo
 
 Per la percentagepipe:
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- Per la percentuale funziona allo stesso modo -->
@@ -1524,7 +1524,7 @@ app.component.html
 
 La **currencypipe** è un argomento interessante:
 
-app.component.html
+**app.component.html**
 
 ```html
 <!-- La currencypipe senza aggiungere niente di default ci
@@ -1558,7 +1558,7 @@ Utilizziamo un nuovo comando nel terminale:
 
 Il file che viene a crearsi si presenta così:
 
-servizio-prova.service.ts
+**servizio-prova.service.ts**
 
 ```ts
 import { Injectable } from "@angular/core";
@@ -1587,7 +1587,7 @@ In genere nelle applicazioni ci sono più service, per esempio c'è un service c
 
 Riprendiamo l'array di oggetti persone che avevamo già visto nelle prime lezioni e chiamiamolo in modo leggermente diverso:
 
-servizio-prova.service.ts
+**servizio-prova.service.ts**
 
 ```ts
 export class ServizioProvaService {
@@ -1602,7 +1602,7 @@ export class ServizioProvaService {
 
 Vediamo come facciamo ad accedere ai dati al suo interno in modo "brutale", proviamo ad accedere da prova.component:
 
-prova.component.ts
+**prova.component.ts**
 
 ```ts
   // Inniettiamo il service a prova.component inserendolo nel costruttore
@@ -1621,13 +1621,13 @@ Quindi se in un'applicazione dobbiamo condividere dati tra più componenti, anzi
 
 Dai service ovviamente possiamo richiamare anche metodi non solo dati.
 
-prova.component.ts
+**prova.component.ts**
 
 ```ts
 personaService = this.servizioProva.personeServiceLesson[0].nome;
 ```
 
-prova.component.html
+**prova.component.html**
 
 ```html
 <p>Prova Lezione Service: {{ personaService }}</p>
