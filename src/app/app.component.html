@@ -178,7 +178,6 @@ proprietà, invece andava usato lo stesso nome del selettore, ovvero
 appHighlight, perché il selettore è esso stesso anche una proprietà -->
 <p [appHighlight]="colore" defaultColor="blue">Paragrafo creazione direttiva</p>
 
-
 <!-- Usiamo la string interpolation, la stanghett è una pipe e vuol dire
 che adesso possiamo inserire delle funzioni pipe, alcune non necessitano
 di parametri che possiamo aggiungere, ad esempio "uppercase" -->
@@ -191,24 +190,24 @@ la pipe -->
 <!-- In questo modo mostra mese, giorno e anno -->
 <p>{{ oggi | date }}</p>
 <!-- In questo modo avremo anche l'orario -->
-<p>{{ oggi | date:"medium" }}</p>
+<p>{{ oggi | date: "medium" }}</p>
 <!-- In questo modo avremo solo l'ora -->
-<p>{{ oggi | date:"shortTime" }}</p>
+<p>{{ oggi | date: "shortTime" }}</p>
 <!-- Possiamo anche formattarlo direttamente con minuti e secondi -->
-<p>{{ oggi | date:"mm:ss" }}</p>
+<p>{{ oggi | date: "mm:ss" }}</p>
 <!-- Proviamo ad aggiungere anche le ore alla precedente pipe -->
-<p>{{ oggi | date:"h:mm:ss" }}</p>
+<p>{{ oggi | date: "h:mm:ss" }}</p>
 <!-- Una versione completa ed utile può essere la seguente,
 impostando MMM appare il mese testuale -->
-<p>{{ oggi | date:"dd/mm/yyyy - h:mm:ss" }}</p>
+<p>{{ oggi | date: "dd/mm/yyyy - h:mm:ss" }}</p>
 
 <!-- Vediamo la decimalpipe, gli stiamo dicendo di riportare minimo due
 numeri interi e dopo la virgola, di riportare minimo 2 decimali e massimo
 4 decimali -->
-<p>{{ numeroPipeLesson | number: '2.2-4' }}</p>
+<p>{{ numeroPipeLesson | number: "2.2-4" }}</p>
 
 <!-- Per la percentuale funziona allo stesso modo -->
-<p>{{ numeroPipeLesson | percent: '2.2-4' }}</p>
+<p>{{ numeroPipeLesson | percent: "2.2-4" }}</p>
 
 <!-- La currencypipe senza aggiungere niente di default ci
 riporterà il numero espresso in dollari -->
@@ -224,4 +223,12 @@ riporterà il numero espresso in dollari -->
 quanti numeri e quanti decimali riportare -->
 <p>{{ numeroPipeLesson | currency: "EUR":"symbol":"2.1-5" }}</p>
 
-<app-prova></app-prova>
+<!--Menu per passare da una pagina all'altra con il
+routing, non possiamo usare href, quindi useremo
+l'attributo routerLink -->
+<a routerLink="/">Home</a>
+<a routerLink="about">About</a>
+<a routerLink="contact">Contact</a>
+
+<router-outlet></router-outlet>
+

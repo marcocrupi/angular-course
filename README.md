@@ -1598,6 +1598,7 @@ export class ServizioProvaService {
     { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true, color: 'green' },
     { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
   ];
+}
 ```
 
 Vediamo come facciamo ad accedere ai dati al suo interno in modo "brutale", proviamo ad accedere da prova.component:
@@ -1634,3 +1635,87 @@ personaService = this.servizioProva.personeServiceLesson[0].nome;
 ```
 
 Con questo codice ho fatto lo string interpolation di una proprietà che prende il valore direttamente dal service.
+
+## Cambiare pagina con il Routing - LEZIONE 23
+
+Cos'è il routing? È di base l'instradamento, ovvero la capaicità che abbiamo in Angular di spostarci da una pagina all'altra (o da un componente all'altro).
+
+Se non abbiamo installato il routing al momento di creazione dell'app Angular possiamo generarlo noi stessi con:
+
+**ng g module app-routing --flat --module=app**
+
+Abbiamo usato **--flat**, perché non vogliamo che crei la sua cartella adhoc di routing.
+
+Abbiamo usato anche **--module=app** perché va specificato in che modulo va inserito, perché è un modulo a se stante ma deve fare riferimento ad app.module.
+
+Diamo un'occhiata a questo file:
+
+**app-routing.module.ts**
+
+```ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+```
+
+Per prima cosa creiamo una cartella chiamata "componenti" e generiamo dei nuovi componenti da linea di comando:
+
+**ng g c componenti/about**
+
+Ora vedremo in modo grezzo come passare da un componente all'altro.
+
+Il modulo app-routing.module.ts ha un NgModule (come app.module), in cui gestisce tutta la parte di routing. Nella variabile "routes" inseriremo le pagine (che sarebbero i componenti) della nostra app:
+
+**app-routing.module.ts**
+
+```ts
+const routes: Routes = [
+  { path: '', component: HomeComponent }
+];
+```
+
+Se andiamo a controllare avviando l'app però notiamo che ancora vediamo la pagina di app.component e non il componente indicato in routes. Questo perché non abbiamo definito l'area di lavoro:
+
+**app.component.html**
+
+```html
+<router-outlet></router-outlet>
+```
+
+Inserendo router-outlet vedremo a schermo il componente HomeComponent.
+
+**app-routing.module.ts**
+
+```ts
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+];
+```
+
+Così facendo se digitiamo il nome dei componenti nell'url dovremmo vedere apparire il loro contenuto (ad esempio http://localhost:4200/about).
+
+Con questo sistema siamo in grado di passare da un componente a un altro.
+
+Proviamo a creare un menu rudimentale:
+
+**app.component.html**
+
+```html
+<!--Menu per passare da una pagina all'altra con il
+routing, non possiamo usare href, quindi useremo
+l'attributo routerLink -->
+<a routerLink="/">Home</a>
+<a routerLink="about">About</a>
+<a routerLink="contact">Contact</a>
+
+<router-outlet></router-outlet>
+```
