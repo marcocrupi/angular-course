@@ -280,15 +280,15 @@ La parte logica prende il nome di **model**, ed è quella nel file Typescript de
 
 Il databinding si scompone in due categorie:
 
-* **one-way (una direzione)**: portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
-* **two-way (doppia direzione)**: i dati vengono passati da ambo le parti in contemporanea.
+- **one-way (una direzione)**: portiamo i dati dalla logica al componente view, oppure dal componente alla logica.
+- **two-way (doppia direzione)**: i dati vengono passati da ambo le parti in contemporanea.
 
 Tipi di data binding (li vedremo in dettaglio nelle prossime lezioni):
 
-* **String interpolation (interpolazione delle stringhe)**: serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
-* **Property binding**: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
-* **Event binding**: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
-* **Two-way binding**: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
+- **String interpolation (interpolazione delle stringhe)**: serve per mandare a schermo dei dati, per esempio potremmo cambiare il nome del cane facendo comparire il valore stringa di una variabile.
+- **Property binding**: non è con i dati che mostriamo a schermo ma con le proprietà degli elementi html, per esempio potremmo mostrare una classe css in base a un tipo di dato.
+- **Event binding**: al contrario dei due precedenti questo tipo di databinding lega gli eventi che compaiono nella view e li mandiamo a typescript, per esempio quando clicco sui vari bottoni deve accadere qualcosa.
+- **Two-way binding**: un esempio di questo tipo di databinding è il form, in cui prendiamo dei dati da typescript ma se succede qualcosa li andiamo a cambiare. Per esempio un input che manda il nome del cane nella card modificando il valore di una proprietà.
 
 I primi tre sono one-way mentre l'ultimo come suggerisce il nome è two-way. Quindi esistono 4 modi di fare databinding.
 
@@ -757,11 +757,11 @@ Potremmo usare l'indice in un condizionale, dove ad esempio il cerchio arancione
 
 Tra le altre variabili che potremmo prendere troviamo:
 
-* **count**, che prende tutta la lunghezza dell'array.
-* **first**, restituisce true sul primo elemento dell'array e false negli altri.
-* **last**, restituisce true nell'ultimo elemento dell'array e false negli altri.
-* **even**, restituisce true sugli elementi pari e false sui dispari.
-* **odd**, restituisce true sugli elementi dispari e false sui pari.
+- **count**, che prende tutta la lunghezza dell'array.
+- **first**, restituisce true sul primo elemento dell'array e false negli altri.
+- **last**, restituisce true nell'ultimo elemento dell'array e false negli altri.
+- **even**, restituisce true sugli elementi pari e false sui dispari.
+- **odd**, restituisce true sugli elementi dispari e false sui pari.
 
 Le variabili sono presenti sulla documentazione: https://angular.io/api/common/NgFor
 
@@ -1592,11 +1592,11 @@ Riprendiamo l'array di oggetti persone che avevamo già visto nelle prime lezion
 ```ts
 export class ServizioProvaService {
   personeServiceLesson = [
-    { nome: 'Luca', cognome: 'Rossi', isOnline: true, color: 'blue' },
-    { nome: 'Marco', cognome: 'Verdi', isOnline: false, color: 'red' },
-    { nome: 'Anna', cognome: 'Pannocchia', isOnline: false, color: 'yellow' },
-    { nome: 'Leonardo', cognome: 'Sciascia', isOnline: true, color: 'green' },
-    { nome: 'Maccio', cognome: 'Capatonda', isOnline: false, color: 'purple' },
+    { nome: "Luca", cognome: "Rossi", isOnline: true, color: "blue" },
+    { nome: "Marco", cognome: "Verdi", isOnline: false, color: "red" },
+    { nome: "Anna", cognome: "Pannocchia", isOnline: false, color: "yellow" },
+    { nome: "Leonardo", cognome: "Sciascia", isOnline: true, color: "green" },
+    { nome: "Maccio", cognome: "Capatonda", isOnline: false, color: "purple" },
   ];
 }
 ```
@@ -1653,8 +1653,8 @@ Diamo un'occhiata a questo file:
 **app-routing.module.ts**
 
 ```ts
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [];
 
@@ -1676,9 +1676,7 @@ Il modulo app-routing.module.ts ha un NgModule (come app.module), in cui gestisc
 **app-routing.module.ts**
 
 ```ts
-const routes: Routes = [
-  { path: '', component: HomeComponent }
-];
+const routes: Routes = [{ path: "", component: HomeComponent }];
 ```
 
 Se andiamo a controllare avviando l'app però notiamo che ancora vediamo la pagina di app.component e non il componente indicato in routes. Questo perché non abbiamo definito l'area di lavoro:
@@ -1695,9 +1693,9 @@ Inserendo router-outlet vedremo a schermo il componente HomeComponent.
 
 ```ts
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: "", component: HomeComponent },
+  { path: "about", component: AboutComponent },
+  { path: "contact", component: ContactComponent },
 ];
 ```
 
@@ -1718,4 +1716,221 @@ l'attributo routerLink -->
 <a routerLink="contact">Contact</a>
 
 <router-outlet></router-outlet>
+```
+
+## Routing con parametri - LEZIONE 24
+
+Routing con parametri, per fare un esempio concreto, nel nostro componente contact inseriremo vari contatti, creando su ognuno di essi si andrà a un url specifico che manterrà la sua struttura eccetto per il parametro alla fine di esso, per esempio nell'url "http://localhost:4200/contatti/pippocontact", "pippocontact" è il parametro.
+
+Creiamo il componente contatti:
+
+**ng g c componenti/contatti**
+
+**app.component.html**
+
+```html
+<a routerLink="/" style="margin-right: 10px;">Home</a>
+<a routerLink="contatti" style="margin-right: 10px;">Contatti</a>
+
+<router-outlet></router-outlet>
+```
+
+**app.routing.module.ts**
+
+```ts
+const routes: Routes = [
+  { path: "", component: HomeComponent },
+  { path: "about", component: AboutComponent },
+  { path: "contact", component: ContactComponent },
+  { path: "contatti", component: ContattiComponent },
+];
+```
+
+Adesso cominciamo a passare dei dati, andiamo al nostro service.
+
+**servizio-prova.service.ts**
+
+```ts
+  getPersone() {
+    return this.personeServiceLesson;
+  }
+```
+
+**contatti.component.ts**
+
+```ts
+  // Se dovesse dare problemi andare su tsconfig.json
+  // e aggiungere questa riga a compilerOptions:
+  // "strictPropertyInitialization": false
+  persone: any;
+
+  // Prendiamo i dati dal service
+  constructor(private servizioProva: ServizioProvaService) {}
+
+  ngOnInit(): void {
+    this.persone = this.servizioProva.getPersone();
+  }
+```
+
+**contatti.component.html**
+
+```html
+<p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+
+<div *ngFor="let persona of persone">
+  <p>{{ persona.nome }} {{ persona.cognome }}</p>
+</div>
+```
+
+A questo punto dovrebbe restituirsci a schermo tutta la nostra contatti, adesso vorrei poter andare sul primo contatto scrivendo il parametro 0 nell'url, ad esempio "http://localhost:4200/contatti/0".
+
+**app.routing.module.ts**
+
+```ts
+const routes: Routes = [
+  { path: "contatti", component: ContattiComponent },
+  // "/:id" serve a indicare il parametro
+  { path: "contatti/:id", component: ContattiComponent },
+];
+```
+
+Adesso Angular è in grado di gestire il parametro, quello che però dobbiamo fare è riuscire a prenderlo, per poterlo fare dobbiamo andare nel componente e lavorare con le route, ma soprattutto con activated route, quindi la route attiva la strada che sarà "contatti/:id". Peciò dobbiamo:
+
+**contatti.component.ts**
+
+```ts
+  // Il primo parametro prende i dati dal service
+  // Il secondo parametro attiva la route
+  constructor(
+    private servizioProva: ServizioProvaService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.persone = this.servizioProva.getPersone();
+    // Con snapshot è come se avesse fatto uno screen del route attuale
+    // paraMap è la mappa di tutti i parametri
+    // in get indichiamo il nome del parametro
+    this.route.snapshot.paramMap.get('id')
+  }
+```
+
+In questo modo se mettessimo this.route.snapshot.paramMap.get('id') in un console.log vedremmo che riusciamo a catturare qualsiasi cosa digitata come paraemtro nell'url.
+
+Adesso vogliamo mostrare qualcosa di diverso in base al parametro, quindi se il parametro è null dovrà mandarci a schermo l'intera lista contatti, se invece no vuol dire che vogliamo vedere il profilo del contatto. Dobbiamo quindi fare:
+
+**contatti.component.ts**
+
+```ts
+  isProfile: boolean = false;
+
+  ngOnInit(): void {
+    this.persone = this.servizioProva.getPersone();
+
+    // Se non restituisce un numero darà false, altrimenti true.
+    this.isProfile = !this.route.snapshot.paramMap.get('id') ? false : true;
+
+    // Con snapshot è come se avesse fatto uno screen del route attuale
+    // paraMap è la mappa di tutti i parametri
+    // in get indichiamo il nome del parametro
+    console.log(this.route.snapshot.paramMap.get('id'));
+
+    console.log(this.isProfile);
+  }
+```
+
+Nota: possiamo vedere come abbiamo delle variabili all'interno dei componenti, e queste variabili le possiamo passare a un sottocomponente. Quindi non tutte le variabili vengono gestite dai service.
+
+Ora vogliamo che la lista contatti compaia se isProfile è false:
+
+**contatti.component.html**
+
+```html
+<div *ngIf="!isProfile; else profiloContatto">
+  <p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+
+  <div *ngFor="let persona of persone">
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </div>
+</div>
+
+<ng-template #profiloContatto>
+  <p>Profilo di Default</p>
+</ng-template>
+```
+
+A questo punto dobbiamo riuscire a prendere il profilo che ci interessa:
+
+**contatti.component.ts**
+
+```ts
+persone: any;
+persona: any;
+
+ngOnInit(): void {
+    // this.persone = this.servizioProva.getPersone();
+
+    // Se non restituisce un numero darà false, altrimenti true.
+    // this.isProfile = !this.route.snapshot.paramMap.get('id') ? false : true;
+
+    // Commentiamo il precedente codice e facciamo un if
+    if (this.route.snapshot.paramMap.get('id')) {
+      this.isProfile = true;
+      this.persona = this.servizioProva.getPersona(
+        // Col punto esclamativo "assicuriamo" Typescript
+        // che non arrivi null ma un numero, ovvero l'id
+        parseInt(this.route.snapshot.paramMap.get('id')!)
+      );
+    } else {
+      this.isProfile = false;
+      // Se non abbiamo l'id vogliamo avere tutta la lista delle persone
+      this.persone = this.servizioProva.getPersone();
+    }
+
+    // Con snapshot è come se avesse fatto uno screen del route attuale
+    // paraMap è la mappa di tutti i parametri
+    // in get indichiamo il nome del parametro
+    console.log(this.route.snapshot.paramMap.get('id'));
+
+    console.log(this.isProfile);
+  }
+```
+
+**contatti.component.html**
+
+```html
+<div *ngIf="!isProfile; else profiloContatto">
+  <p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+
+  <div *ngFor="let persona of persone">
+    <p>{{ persona.nome }} {{ persona.cognome }}</p>
+  </div>
+</div>
+
+<ng-template #profiloContatto>
+  <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p>
+</ng-template>
+```
+
+Adesso vogliamo che i singoli contatti siano cliccabili, così da non dover più inserire manualmente il parametro nell'url:
+
+**contatti.component.html**
+
+```html
+<div *ngIf="!isProfile; else profiloContatto">
+  <p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+
+  <div *ngFor="let persona of persone; index as i">
+    <!-- Usiamo il tag a in un modo diverso, esiste un altro
+    modo per ottenere lo stesso risultato, che usa un array,
+    ma lo vedremo successivamente -->
+    <a routerLink="/contatti/{{ i }}"
+      ><p>{{ persona.nome }} {{ persona.cognome }}</p></a
+    >
+  </div>
+</div>
+
+<ng-template #profiloContatto>
+  <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p>
+</ng-template>
 ```

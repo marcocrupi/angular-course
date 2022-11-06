@@ -13,4 +13,12 @@ export class ServizioProvaService {
   ];
 
   constructor() {}
+
+  getPersona(index: number) {
+    return this.personeServiceLesson[index];
+  }
+
+  getPersone() {
+    return this.personeServiceLesson;
+  }
 }

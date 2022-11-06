@@ -15,9 +15,18 @@ import { HighlightDirective } from './direttive/highlight/highlight.directive';
 import { AboutComponent } from './componenti/about/about.component';
 import { ContactComponent } from './componenti/contact/contact.component';
 import { HomeComponent } from './componenti/home/home.component';
+import { ContattiComponent } from './componenti/contatti/contatti.component';
 
 @NgModule({
-  declarations: [AppComponent, ProvaComponent, HighlightDirective, AboutComponent, ContactComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    ProvaComponent,
+    HighlightDirective,
+    AboutComponent,
+    ContactComponent,
+    HomeComponent,
+    ContattiComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
