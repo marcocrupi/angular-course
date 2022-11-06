@@ -1735,7 +1735,7 @@ Creiamo il componente contatti:
 <router-outlet></router-outlet>
 ```
 
-**app.routing.module.ts**
+**app-routing.module.ts**
 
 ```ts
 const routes: Routes = [
@@ -1784,7 +1784,7 @@ Adesso cominciamo a passare dei dati, andiamo al nostro service.
 
 A questo punto dovrebbe restituirsci a schermo tutta la nostra contatti, adesso vorrei poter andare sul primo contatto scrivendo il parametro 0 nell'url, ad esempio "http://localhost:4200/contatti/0".
 
-**app.routing.module.ts**
+**app-routing.module.ts**
 
 ```ts
 const routes: Routes = [
@@ -1934,3 +1934,260 @@ Adesso vogliamo che i singoli contatti siano cliccabili, così da non dover più
   <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p>
 </ng-template>
 ```
+
+## Routing children per caricare sottocomponenti - LEZIONE 25
+
+Quest volta, quando si clicca su un contatto, vogliamo che si apra a lato pagina il profilo effettivo, così da non dover uscire dalla pagina.
+
+Tutto si andrà a svolgere dentro contatti ma caricheremo un altro componente che è il singolo contatto (o pagina del profilo).
+
+Creiamo il componente contatto singolo:
+
+**ng g c componenti/contatto**
+
+Iniziamo a inserire il sottocomponente:
+
+**contatti.component.html**
+
+```html
+<div *ngIf="!isProfile; else profiloContatto">
+  <p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+
+  <div *ngFor="let persona of persone; index as i">
+    <!-- Usiamo il tag a in un modo diverso, esiste un altro
+    modo per ottenere lo stesso risultato, che usa un array,
+    ma lo vedremo successivamente -->
+    <a routerLink="/contatti/{{ i }}"
+      ><p>{{ persona.nome }} {{ persona.cognome }}</p></a
+    >
+  </div>
+</div>
+
+<ng-template #profiloContatto>
+  <!-- <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p> -->
+  <app-contatto></app-contatto>
+</ng-template>
+```
+
+**contatto.component.html**
+
+```html
+<p>Profilo di Nome e Cognome</p>
+<p>Colore preferito: blug</p>
+```
+
+Siamo andati a inserire in contatti il sottocomponente, quindi abbiamo il figlio di un figlio.
+
+Vediamo come:
+
+**contatti.component.html**
+
+```html
+<ng-template #profiloContatto>
+  <!-- Passiamo al componente figlio i dati contenuti in
+  contatti.component.ts, ovvero nel componente padre -->
+  <app-contatto [persona]="persona"></app-contatto>
+</ng-template>
+```
+
+**contatto.component.ts**
+
+```ts
+import { Component, Input, OnInit } from "@angular/core";
+
+@Component({
+  selector: "app-contatto",
+  templateUrl: "./contatto.component.html",
+  styleUrls: ["./contatto.component.scss"],
+})
+export class ContattoComponent implements OnInit {
+  // Siccome stiamo importando dal componente genitore
+  // contatti.component.ts il valore di persona si usa
+  // il decoratore @Input
+  @Input() persona: any;
+
+  constructor() {}
+
+  ngOnInit(): void {}
+}
+```
+
+**contatto.component.html**
+
+```html
+<p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p>
+<p>Colore preferito: {{ persona.color }}</p>
+```
+
+Tutto funziona, ma noi non vogliamo continuare a cambiare pagina, vogliamo avere i profili a lato rispetto alla lista.
+
+**app-routing.module.ts**
+
+```ts
+const routes: Routes = [
+  { path: "", component: HomeComponent },
+  { path: "about", component: AboutComponent },
+  { path: "contact", component: ContactComponent },
+  // children è un array di altri path
+  {
+    path: "contatti",
+    component: ContattiComponent,
+    children: [{ path: ":id", component: ContattoComponent }],
+  },
+  // "/:id" serve a indicare il parametro
+  // { path: 'contatti/:id', component: ContattiComponent },
+];
+```
+
+Questa parte cambia rispetto a prima nel seguente modo:
+
+**contatti.component.html**
+
+```html
+<!-- <div *ngIf="!isProfile"> -->
+<p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+
+<div *ngFor="let persona of persone; index as i">
+  <!-- Usiamo il tag a in un modo diverso, esiste un altro
+    modo per ottenere lo stesso risultato, che usa un array,
+    ma lo vedremo successivamente -->
+  <a routerLink="/contatti/{{ i }}"
+    ><p>{{ persona.nome }} {{ persona.cognome }}</p></a
+  >
+</div>
+<!-- </div> -->
+
+<!-- Si usa ogni volta che all'interno di un componente
+volete caricare un altro componente in modo dinamico , lo
+si usa anche quando si hanno dei router child come nel nostro caso -->
+<router-outlet></router-outlet>
+
+<!-- <ng-template #profiloContatto> -->
+<!-- <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p> -->
+<!-- Passiamo al componente figlio i dati contenuti in
+  contatti.component.ts, ovvero nel componente padre -->
+<!-- <app-contatto [persona]="persona"></app-contatto>
+</ng-template> -->
+```
+
+Avendo tolto il selettore app-contatto ci darà problemi. Andiamo a modificare anche la logica di contatti.component (questo perché abbiamo collegato l'id a un altro componente):
+
+**contatti.component.ts**
+
+```ts
+export class ContattiComponent implements OnInit {
+  // Se dovesse dare problemi andare su tsconfig.json
+  // e aggiungere questa riga a compilerOptions:
+  // "strictPropertyInitialization": false
+  persone: any;
+  persona: any;
+  // isProfile: boolean = false;
+
+  // Il primo parametro prende i dati dal service
+  // Il secondo parametro attiva la route
+  constructor(
+    private servizioProva: ServizioProvaService // private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // this.persone = this.servizioProva.getPersone();
+
+    // Se non restituisce un numero darà false, altrimenti true
+    // this.isProfile = !this.route.snapshot.paramMap.get('id') ? false : true;
+
+    // Questo ci interessa per prendere tutte le persone
+    this.persone = this.servizioProva.getPersone();
+
+    // Commentiamo il precedente codice e facciamo un if
+
+    // else {
+    // this.isProfile = false;
+    // Se non abbiamo l'id vogliamo avere tutta la lista delle persone
+    // this.persone = this.servizioProva.getPersone();
+    // }
+
+    // Con snapshot è come se avesse fatto uno screen del route attuale
+    // paraMap è la mappa di tutti i parametri
+    // in get indichiamo il nome del parametro
+    // console.log(this.route.snapshot.paramMap.get('id'));
+
+    // console.log(this.isProfile);
+  }
+}
+```
+
+**contatto.component.ts**
+
+```ts
+export class ContattoComponent implements OnInit {
+  persona: any;
+  // Siccome stiamo importando dal componente genitore
+  // contatti.component.ts il valore di persona si usa
+  // il decoratore @Input
+  // @Input() persona: any;
+
+  constructor(
+    private servizioProva: ServizioProvaService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.get('id')) {
+      // this.isProfile = true;
+      this.persona = this.servizioProva.getPersona(
+        // Col punto esclamativo "assicuriamo" Typescript
+        // che non arrivi null ma un numero, ovvero l'id
+        parseInt(this.route.snapshot.paramMap.get('id')!)
+      );
+    }
+  }
+}
+```
+
+Se andiamo a premere il singolo contatto apparirà sotto l'elenco dei contatti. Quindi non cambierà pagina, tuttavia se continuo a cliccare sugli altri nomi non aggiorna il componente, questo perché non riesce a capire il cambiamento del parametro.
+
+Quindi dobbiamo riuscire a dire al componente contatto.component di aggiornarsi a ogni cambio di parametro.
+
+Per fare ciò dobbiamo effettuare il **subscribe**, questo serve a far stare ContattoComponent attento ai cambiamenti, per fare ciò:
+
+**contatto.component.ts**
+
+```ts
+export class ContattoComponent implements OnInit {
+  id!: number;
+  persona: any;
+  // Siccome stiamo importando dal componente genitore
+  // contatti.component.ts il valore di persona si usa
+  // il decoratore @Input
+  // @Input() persona: any;
+
+  constructor(
+    private servizioProva: ServizioProvaService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // Mettendo un + lo convertiamo in numero, è la stessa cosa di fare pareseInt
+    // Ho messo il ! per evitare il controllo del null, se vogliamo evitare
+    // questo tipo di controllo in TypeScript possiamo andiare in tsconfig.json
+    // ed inserire in "compilerOptions" la voce "strictNullChecks"
+    // this.id = +this.route.snapshot.paramMap.get('id')!;
+
+    // Sottoscrivendoci non abbiamo più bisogno dello snapshot
+    // Con subscribe sottoscriviamo un abbonamento alla mappa di
+    // parametri del route, quando cambia non essendo più su un altro 
+    // route ma un un child route dobbiamo iscriverci, lo snapshot non
+    // basta più
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.id = +params.get('id')!;
+      this.persona = this.servizioProva.getPersona(this.id);
+    })
+
+  }
+}
+```
+
+Una volta fatto ciò aggiornerà il componente dei singoli contatti a ogni click su ognuno di essi.
+
+Per mettere lateralmente il componente basterà lavorare sul css e sulla struttura html, cosa che non faremo in questa sede.
+

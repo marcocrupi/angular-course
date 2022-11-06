@@ -16,6 +16,7 @@ import { AboutComponent } from './componenti/about/about.component';
 import { ContactComponent } from './componenti/contact/contact.component';
 import { HomeComponent } from './componenti/home/home.component';
 import { ContattiComponent } from './componenti/contatti/contatti.component';
+import { ContattoComponent } from './componenti/contatto/contatto.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ContattiComponent } from './componenti/contatti/contatti.component';
     ContactComponent,
     HomeComponent,
     ContattiComponent,
+    ContattoComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,24 @@
-<div *ngIf="!isProfile; else profiloContatto">
-  <p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
+<!-- <div *ngIf="!isProfile"> -->
+<p style="text-transform: uppercase; margin-top: 20px">Lista contatti</p>
 
-  <div *ngFor="let persona of persone; index as i">
-    <!-- Usiamo il tag a in un modo diverso, esiste un altro
+<div *ngFor="let persona of persone; index as i">
+  <!-- Usiamo il tag a in un modo diverso, esiste un altro
     modo per ottenere lo stesso risultato, che usa un array,
     ma lo vedremo successivamente -->
-    <a routerLink="/contatti/{{i}}"><p>{{ persona.nome }} {{ persona.cognome }}</p></a>
-  </div>
+  <a routerLink="/contatti/{{ i }}"
+    ><p>{{ persona.nome }} {{ persona.cognome }}</p></a
+  >
 </div>
+<!-- </div> -->
 
-<ng-template #profiloContatto>
-  <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p>
-</ng-template>
+<!-- Si usa ogni volta che all'interno di un componente
+volete caricare un altro componente in modo dinamico , lo
+si usa anche quando si hanno dei router child come nel nostro caso -->
+<router-outlet></router-outlet>
+
+<!-- <ng-template #profiloContatto> -->
+<!-- <p>Profilo di {{ persona.nome }} {{ persona.cognome }}</p> -->
+<!-- Passiamo al componente figlio i dati contenuti in
+  contatti.component.ts, ovvero nel componente padre -->
+<!-- <app-contatto [persona]="persona"></app-contatto>
+</ng-template> -->
