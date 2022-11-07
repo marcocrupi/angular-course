@@ -2191,3 +2191,65 @@ Una volta fatto ciò aggiornerà il componente dei singoli contatti a ogni click
 
 Per mettere lateralmente il componente basterà lavorare sul css e sulla struttura html, cosa che non faremo in questa sede.
 
+## Routing, redirect ed errori - LEZIONE 26
+
+Vediamo come gestire gli errori ed eventuali redirect, per esempio potremmo avere l'errore 404. 
+
+Creiamo il componente NotFound:
+
+ng g c componenti/NotFound
+
+Andiamo ad aggiungere il path dell'errore 404:
+
+**app-routing.modules.ts**
+
+```ts
+const routes: Routes = [
+  { path: '404', component: NotFoundComponent }
+];
+```
+
+**not-found.component.html**
+
+```html
+<p>Errore 404</p>
+```
+
+Così abbiamo la pagina con "Errore 404" ma non abbiamo ancora la gestione dell'errore:
+
+**app-routing.modules.ts**
+
+```ts
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  // children è un array di altri path
+  {
+    path: 'contatti',
+    component: ContattiComponent,
+    children: [{ path: ':id', component: ContattoComponent }],
+  },
+  // "/:id" serve a indicare il parametro
+  // { path: 'contatti/:id', component: ContattiComponent },
+  { path: '404', component: NotFoundComponent },
+  // Va messo in fondo altrimenti va a prendere tutti i path,
+  // gli asterischi servono ad indicare qualsaisi path che non
+  // sia tra quelli sopra elencati, con redirectTo si stabilisce
+  // il path del redirect
+  { path: '**', redirectTo: '/404' },
+];
+```
+
+Se avessimo un path già dedicato alla homepage sul path vuoto dovremmo indicare un redirect direttamente sulla home page:
+
+```ts
+const routes: Routes = [
+  // Con pathMatch il path deve coincidere con il vuoto, o altrimenti
+  // Angular in certe situazioni potrebbe prendere altre cose
+  { path: '', pathMatch: 'full', redirectTo: '/homepage' },
+  { path: 'homepage', component: HomeComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
+];
+```
