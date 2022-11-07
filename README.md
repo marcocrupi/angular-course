@@ -2243,6 +2243,8 @@ const routes: Routes = [
 
 Se avessimo un path già dedicato alla homepage sul path vuoto dovremmo indicare un redirect direttamente sulla home page:
 
+**app-routing.modules.ts**
+
 ```ts
 const routes: Routes = [
   // Con pathMatch il path deve coincidere con il vuoto, o altrimenti
@@ -2253,3 +2255,184 @@ const routes: Routes = [
   { path: '**', redirectTo: '/404' },
 ];
 ```
+
+## Proteggere l'accesso alle pagine con Routing Guard - LEZIONE 27
+
+Vediamo come creare un servizio di **auth (authorization service)**, per fare ciò creiamo una sottocartella **auth** e creiamo un service da terminale:
+
+**ng g s auth/auth**
+
+Potevamo metterlo nella cartella servizi ma in genere si tende a mettere a parte questo elemento.
+
+Stiamo facendo finta di prendere i dati per il login, cosa che non faremo adesso ma più avanti nel corso. 
+
+**auth.service.ts**
+
+```ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  isLoggedIn = false;
+
+  constructor() {}
+
+  isAuthenticated() {
+    return this.isLoggedIn;
+  }
+}
+```
+
+Abbiamo creato l'auth service (benché sia fittizio), ora dobbiamo creare la guard effettiva, andiamo da terminale e digitiamo:
+
+**ng g guard auth/auth**
+
+Ci proporrà delle scelte riguardo l'interfaccia, selezioniamo **CanActivate**.
+
+Come possiamo vedere auth.guard.ts ci dà un po' di roba, siccome non ci interessa tutto il codice, dopo RouterStateSnapshot leviamo i tipi di ritorno, il file quindi diventerà così:
+
+**auth.guard.ts**
+
+```ts
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  RouterStateSnapshot,
+} from '@angular/router';
+
+@Injectable({
+  providedIn: 'root',
+})
+// CanActivate ha il suo metodo, che va a prendere lo snapshot
+// della route attiva
+export class AuthGuard implements CanActivate {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return true;
+  }
+}
+```
+
+Adesso vogliamo importare in esso il nostro servizio aggiungendo il costruttore e modificando il return:
+
+**auth.guard.ts**
+
+```ts
+export class AuthGuard implements CanActivate {
+
+  constructor(private authService: AuthService){}
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    // Dove c'è il return vogliamo ritornare isAuthenticated,
+    // va a prendere il login e ci farà sapere se è effettivamente
+    // connesso.
+    return this.authService.isAuthenticated();
+  }
+}
+```
+
+In app-routing.module.ts andiamo a modificare il path contatti:
+
+**app-routing.module.ts**
+
+```ts
+const routes: Routes = [
+  {
+    path: 'contatti',
+    component: ContattiComponent,
+    // Con canActivate stiamo dicendo che questo componente si può
+    // attivare solo se AuthGuard restituisce true , il
+    // quale restituisce true se isLoggedIn presente in
+    // auth.service è true
+    canActivate: [AuthGuard],
+    children: [{ path: ':id', component: ContattoComponent }],
+  },
+];
+
+```
+
+Se facciamo una prova non potremo più accedere alla pagina dei contatti. Possiamo farlo solo se modifichiamo isLoggedIn in auth.service da false a true.
+
+Ora proviamo ad aggiungere un ruolo, nel senso che possiamo vedere il child del nostro componente esclusivamente se abbiamo un determinato ruolo.
+
+**auth.service.ts**
+
+```ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  isLoggedIn = true;
+  isAdmin = true;
+
+  constructor() {}
+
+  isAuthenticated() {
+    return this.isLoggedIn;
+  }
+
+  isRoleAdmin() {
+    return this.isAdmin;
+  }
+}
+```
+
+**auth.guard.ts**
+
+```ts
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateChild,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Injectable({
+  providedIn: 'root',
+})
+// CanActivate ha il suo metodo, che va a prendere lo snapshot
+// della route attiva
+export class AuthGuard implements CanActivate, CanActivateChild {
+  constructor(private authService: AuthService) {}
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    // Dove c'è il return vogliamo ritornare isAuthenticated,
+    // va a prendere il login e ci farà sapere se è effettivamente
+    // connesso.
+    return this.authService.isAuthenticated();
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
+    return this.authService.isRoleAdmin();
+  }
+}
+```
+
+**app-routing.module.ts**
+
+```ts
+const routes: Routes = [
+  {
+    path: 'contatti',
+    component: ContattiComponent,
+    // Con canActivate stiamo dicendo che questo componente si può
+    // attivare solo se AuthGuard restituisce true , il
+    // quale restituisce true se isLoggedIn presente in
+    // auth.service è true
+    canActivate: [AuthGuard],
+    // Con ActivateChild decidiamo se far vedere il path children
+    // ciò dipende se isAdimn in auth.service è true o false
+    canActivateChild: [AuthGuard],
+    children: [{ path: ':id', component: ContattoComponent }],
+  },
+];
+```
+
+Con il codice sopra se isLoggedIn è true e isAdmin è true allora possiamo vedere sia il modulo contatti che i rispettivi figli. isLoggedIn regola l'accesso ai contatti mentre isAdmin ai singoli contatti.
+

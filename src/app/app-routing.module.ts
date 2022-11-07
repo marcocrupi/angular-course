@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { AboutComponent } from './componenti/about/about.component';
 import { ContactComponent } from './componenti/contact/contact.component';
 import { ContattiComponent } from './componenti/contatti/contatti.component';
@@ -19,6 +20,14 @@ const routes: Routes = [
   {
     path: 'contatti',
     component: ContattiComponent,
+    // Con canActivate stiamo dicendo che questo componente si può
+    // attivare solo se AuthGuard restituisce true , il
+    // quale restituisce true se isLoggedIn presente in
+    // auth.service è true
+    canActivate: [AuthGuard],
+    // Con ActivateChild decidiamo se far vedere il path children
+    // ciò dipende se isAdimn in auth.service è true o false
+    canActivateChild: [AuthGuard],
     children: [{ path: ':id', component: ContattoComponent }],
   },
   // "/:id" serve a indicare il parametro
