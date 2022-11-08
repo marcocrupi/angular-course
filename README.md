@@ -2132,12 +2132,12 @@ export class ContattoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.get('id')) {
+    if (this.route.snapshot.paramMap.get("id")) {
       // this.isProfile = true;
       this.persona = this.servizioProva.getPersona(
         // Col punto esclamativo "assicuriamo" Typescript
         // che non arrivi null ma un numero, ovvero l'id
-        parseInt(this.route.snapshot.paramMap.get('id')!)
+        parseInt(this.route.snapshot.paramMap.get("id")!)
       );
     }
   }
@@ -2175,14 +2175,13 @@ export class ContattoComponent implements OnInit {
 
     // Sottoscrivendoci non abbiamo più bisogno dello snapshot
     // Con subscribe sottoscriviamo un abbonamento alla mappa di
-    // parametri del route, quando cambia non essendo più su un altro 
+    // parametri del route, quando cambia non essendo più su un altro
     // route ma un un child route dobbiamo iscriverci, lo snapshot non
     // basta più
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = +params.get('id')!;
+      this.id = +params.get("id")!;
       this.persona = this.servizioProva.getPersona(this.id);
-    })
-
+    });
   }
 }
 ```
@@ -2193,7 +2192,7 @@ Per mettere lateralmente il componente basterà lavorare sul css e sulla struttu
 
 ## Routing, redirect ed errori - LEZIONE 26
 
-Vediamo come gestire gli errori ed eventuali redirect, per esempio potremmo avere l'errore 404. 
+Vediamo come gestire gli errori ed eventuali redirect, per esempio potremmo avere l'errore 404.
 
 Creiamo il componente NotFound:
 
@@ -2204,9 +2203,7 @@ Andiamo ad aggiungere il path dell'errore 404:
 **app-routing.modules.ts**
 
 ```ts
-const routes: Routes = [
-  { path: '404', component: NotFoundComponent }
-];
+const routes: Routes = [{ path: "404", component: NotFoundComponent }];
 ```
 
 **not-found.component.html**
@@ -2221,23 +2218,23 @@ Così abbiamo la pagina con "Errore 404" ma non abbiamo ancora la gestione dell'
 
 ```ts
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: "", component: HomeComponent },
+  { path: "about", component: AboutComponent },
+  { path: "contact", component: ContactComponent },
   // children è un array di altri path
   {
-    path: 'contatti',
+    path: "contatti",
     component: ContattiComponent,
-    children: [{ path: ':id', component: ContattoComponent }],
+    children: [{ path: ":id", component: ContattoComponent }],
   },
   // "/:id" serve a indicare il parametro
   // { path: 'contatti/:id', component: ContattiComponent },
-  { path: '404', component: NotFoundComponent },
+  { path: "404", component: NotFoundComponent },
   // Va messo in fondo altrimenti va a prendere tutti i path,
   // gli asterischi servono ad indicare qualsaisi path che non
   // sia tra quelli sopra elencati, con redirectTo si stabilisce
   // il path del redirect
-  { path: '**', redirectTo: '/404' },
+  { path: "**", redirectTo: "/404" },
 ];
 ```
 
@@ -2249,10 +2246,10 @@ Se avessimo un path già dedicato alla homepage sul path vuoto dovremmo indicare
 const routes: Routes = [
   // Con pathMatch il path deve coincidere con il vuoto, o altrimenti
   // Angular in certe situazioni potrebbe prendere altre cose
-  { path: '', pathMatch: 'full', redirectTo: '/homepage' },
-  { path: 'homepage', component: HomeComponent },
-  { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '/404' },
+  { path: "", pathMatch: "full", redirectTo: "/homepage" },
+  { path: "homepage", component: HomeComponent },
+  { path: "404", component: NotFoundComponent },
+  { path: "**", redirectTo: "/404" },
 ];
 ```
 
@@ -2264,15 +2261,15 @@ Vediamo come creare un servizio di **auth (authorization service)**, per fare ci
 
 Potevamo metterlo nella cartella servizi ma in genere si tende a mettere a parte questo elemento.
 
-Stiamo facendo finta di prendere i dati per il login, cosa che non faremo adesso ma più avanti nel corso. 
+Stiamo facendo finta di prendere i dati per il login, cosa che non faremo adesso ma più avanti nel corso.
 
 **auth.service.ts**
 
 ```ts
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   isLoggedIn = false;
@@ -2296,15 +2293,15 @@ Come possiamo vedere auth.guard.ts ci dà un po' di roba, siccome non ci interes
 **auth.guard.ts**
 
 ```ts
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   RouterStateSnapshot,
-} from '@angular/router';
+} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 // CanActivate ha il suo metodo, che va a prendere lo snapshot
 // della route attiva
@@ -2321,8 +2318,7 @@ Adesso vogliamo importare in esso il nostro servizio aggiungendo il costruttore 
 
 ```ts
 export class AuthGuard implements CanActivate {
-
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // Dove c'è il return vogliamo ritornare isAuthenticated,
@@ -2340,17 +2336,16 @@ In app-routing.module.ts andiamo a modificare il path contatti:
 ```ts
 const routes: Routes = [
   {
-    path: 'contatti',
+    path: "contatti",
     component: ContattiComponent,
     // Con canActivate stiamo dicendo che questo componente si può
     // attivare solo se AuthGuard restituisce true , il
     // quale restituisce true se isLoggedIn presente in
     // auth.service è true
     canActivate: [AuthGuard],
-    children: [{ path: ':id', component: ContattoComponent }],
+    children: [{ path: ":id", component: ContattoComponent }],
   },
 ];
-
 ```
 
 Se facciamo una prova non potremo più accedere alla pagina dei contatti. Possiamo farlo solo se modifichiamo isLoggedIn in auth.service da false a true.
@@ -2360,10 +2355,10 @@ Ora proviamo ad aggiungere un ruolo, nel senso che possiamo vedere il child del 
 **auth.service.ts**
 
 ```ts
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   isLoggedIn = true;
@@ -2384,17 +2379,17 @@ export class AuthService {
 **auth.guard.ts**
 
 ```ts
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
   RouterStateSnapshot,
-} from '@angular/router';
-import { AuthService } from './auth.service';
+} from "@angular/router";
+import { AuthService } from "./auth.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 // CanActivate ha il suo metodo, che va a prendere lo snapshot
 // della route attiva
@@ -2408,7 +2403,10 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.authService.isAuthenticated();
   }
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
+  canActivateChild(
+    childRoute: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): any {
     return this.authService.isRoleAdmin();
   }
 }
@@ -2419,7 +2417,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 ```ts
 const routes: Routes = [
   {
-    path: 'contatti',
+    path: "contatti",
     component: ContattiComponent,
     // Con canActivate stiamo dicendo che questo componente si può
     // attivare solo se AuthGuard restituisce true , il
@@ -2429,10 +2427,113 @@ const routes: Routes = [
     // Con ActivateChild decidiamo se far vedere il path children
     // ciò dipende se isAdimn in auth.service è true o false
     canActivateChild: [AuthGuard],
-    children: [{ path: ':id', component: ContattoComponent }],
+    children: [{ path: ":id", component: ContattoComponent }],
   },
 ];
 ```
 
 Con il codice sopra se isLoggedIn è true e isAdmin è true allora possiamo vedere sia il modulo contatti che i rispettivi figli. isLoggedIn regola l'accesso ai contatti mentre isAdmin ai singoli contatti.
 
+## Cosa sono gli Observable - LEZIONE 28
+
+Gli Observable di Angular sono uno stream di dati. Lo stream ha come è logico una sorgente: il risultato di una chiamata Api Remota, un evento generato nel DOM, i dati provenienti da una query su un database, ecc.
+
+Trattandosi di un flusso, è necessario effettuare la sottoscrizione (subscribe): ogni volta che si presenta un nuovo dato sullo stream, viene eseguita una funzione. Tutto questo ovviamente in modalità asicrona.
+
+Se noi andiamo su contatto.component.ts notiamo che abbiamo fatto il subscribe, ovvero una sottoscrizione a qualcosa che deve ancora avvenire, o che avviene ogni tot, nel nostro caso il cambio di parametro.
+
+Se passiamo col mouse su subscribe ci dice che abbiamo un Observable che ci restituisce un ParamMap. L'observable non fa altro che "osservare", ogni volta che succede qualcosa ci restituisce ParamMap.
+
+Creiamo un esempio di obsersvable in app.component.
+
+**app.component.ts**
+
+```ts
+  ngOnInit(): void {
+    console.log('ngOnInit inputSaluti:', this.inputSaluti);
+
+    // interval viene importato da rxjs, al suo interno
+    // decidiamo ogni quanto tempo deve fare qualcosa
+    // otteniamo un observable number
+    interval(1000).subscribe((numero) => {
+      // interval ci ritorna un numero, va a fare un count
+      console.log(numero);
+    });
+  }
+```
+
+Creiamo un observable da zero, proviamoci:
+
+**app.component.ts**
+
+```ts
+  ngOnInit(): void {
+    new Observable((observer) => {
+      let count = 0;
+      setInterval(() => {
+        // Questo observer è ciò che effettivamente osserva,
+        // e ciò che tiene il conteggio di tutto e decide quando
+        // far partire gli eventi e fermarli, in questo caso con
+        // .next gli stiamo dicendo di buttare fuori il valore
+        // count e di passare alla prossima iterazione
+        observer.next(count);
+        count++;
+      }, 1000);
+      // Essendo un observable ci dobbiamo sottoscrivere
+    }).subscribe((numero) => {
+      console.log(numero);
+    });
+  }
+```
+
+Così facendo funziona, però per parlare di unsuscribe dobbiamo cambiare la posizione del nostro codice spostandolo in un altro componente. Commentiamo il codice e spostiamolo nel componente home:
+
+**home.component.ts**
+
+```ts
+  ngOnInit(): void {
+    interval(1000).subscribe((numero) => {
+      console.log(numero);
+    });
+```
+
+Nel componente home sorge un problema, appena cambiamo componente l'observable non smette di funzionare, continua ad andare avanti.
+
+Se torno indietro ne parte addirittura un altro. A noi ne serviva uno che funzionasse solo quando sono in home.
+
+Questa cosa qua è un problema di ottimizzazione che va a inficiare le prestazioni. 
+
+Noi non possiamo lasciare le sottoscrizioni senza annullare l'abbonamento.
+
+Quello che vogliamo fare ora è l'unsuscribe:
+
+**home.component.ts**
+
+```ts
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+})
+export class HomeComponent implements OnInit, OnDestroy {
+  // Potremmo dare come tipo Observable
+  sottoscrizione: any;
+
+  constructor() {}
+  ngOnInit(): void {
+    this.sottoscrizione = interval(1000).subscribe((numero) => {
+      console.log(numero);
+    });
+  }
+
+  // Noi vogliamo fare l'unsuscribe quando distruggiamo il
+  ngOnDestroy(): void {
+    this.sottoscrizione.unsuscribe();
+  }
+}
+```
+
+Così facendo funziona, da notare che in contatto.component.ts non abbiamo fatto l'unsuscribe perché essendo "impacchettato" con Angular, Angular ci risparmia questa procedura.

@@ -5,6 +5,7 @@ import {
   OnInit,
   AfterViewInit,
 } from '@angular/core';
+import { interval, Observable } from 'rxjs';
 
 // Questo è un decorator, serve a decorare le classi in Angular,
 // ci permette di decorare una classe specificando che cos'è, ovvero un componente
@@ -97,6 +98,29 @@ export class AppComponent implements OnInit, AfterViewInit {
   // inizializzato, non c'è ancora niente
   ngOnInit(): void {
     console.log('ngOnInit inputSaluti:', this.inputSaluti);
+
+    // interval viene importato da rxjs, al suo interno
+    // decidiamo ogni quanto tempo deve fare qualcosa
+    // otteniamo un observable number
+    // interval(1000).subscribe((numero) => {
+    // interval ci ritorna un numero, va a fare un count
+    // console.log(numero);
+    // });
+    // new Observable((observer) => {
+      // let count = 0;
+      // setInterval(() => {
+        // Questo observer è ciò che effettivamente osserva,
+        // e ciò che tiene il conteggio di tutto e decide quando
+        // far partire gli eventi e fermarli, in questo caso con
+        // .next gli stiamo dicendo di buttare fuori il valore
+        // count e di passare alla prossima iterazione
+        // observer.next(count);
+        // count++;
+      // }, 1000);
+      // Essendo un observable ci dobbiamo sottoscrivere
+    // }).subscribe((numero) => {
+      // console.log(numero);
+    // });
   }
 
   // ngAfterViewInit il console.log ci darà il nostro riferimento all'elemeto
