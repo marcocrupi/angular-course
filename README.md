@@ -2529,11 +2529,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Noi vogliamo fare l'unsuscribe quando distruggiamo il
+  // Noi vogliamo fare l'unsubscribe quando distruggiamo il
   ngOnDestroy(): void {
-    this.sottoscrizione.unsuscribe();
+    this.sottoscrizione.unsubscribe();
   }
 }
 ```
 
-Così facendo funziona, da notare che in contatto.component.ts non abbiamo fatto l'unsuscribe perché essendo "impacchettato" con Angular, Angular ci risparmia questa procedura.
+Così facendo funziona, da notare che in contatto.component.ts non abbiamo fatto l'unsubscribe perché essendo "impacchettato" con Angular, Angular ci risparmia questa procedura.
