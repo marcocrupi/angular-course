@@ -1,0 +1,52 @@
+.cerchioVerde {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 20px;
+}
+
+.cerchioRosso {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 20px;
+}
+
+.cerchioArancione {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: orange;
+  border-radius: 20px;
+}
+
+li.ngStyleEs {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+li.ngStyleEs p {
+  margin-bottom: 0;
+}
+li.ngStyleEs .cerchio {
+  margin-right: 10px;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background-color: rgb(0, 4, 255);
+  border-radius: 20px;
+  text-align: center;
+}
+li.ngStyleEs .cerchioOnline {
+  background-color: green;
+  color: white;
+}
+li.ngStyleEs .cerchioOffline {
+  background-color: red;
+  color: blue;
+}
+li.ngStyleEs .secondaClasse {
+  border-radius: 0;
+}/*# sourceMappingURL=app.component.css.map */
